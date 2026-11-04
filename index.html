@@ -53,7 +53,9 @@ th{background:var(--label);color:var(--label-ink);font-weight:700}
 .sub{display:block;font-weight:500;font-size:13px;margin-top:6px;color:var(--muted-ink)}
 .shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .shot{position:relative;border:1px solid #d9e0de;background:#fafbfa;display:flex;align-items:center;justify-content:center}
-.shot img{width:100%;height:auto;display:block}
+.shot img{width:100%;height:190px;object-fit:contain;background:#fff;display:block}
+.cap .shots{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.cap .shot img{height:200px}
 .shot button{position:absolute;top:4px;left:4px;padding:2px 8px;font-size:12px;background:rgba(255,255,255,.92);color:#8a1f1f;border-color:#e3c4c4}
 .addev{margin-top:8px;display:inline-block;font-size:13px;padding:7px 12px;background:var(--soft);color:var(--band);border:1px dashed #9db8ad;border-radius:6px;cursor:pointer}
 .sign{margin-top:22px}
@@ -715,6 +717,14 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
     });
   }
 
+  // parts of the page that must not be cut between two PDF pages
+  function avoidZones(sheet,k){
+    const s=sheet.getBoundingClientRect();
+    return [...sheet.querySelectorAll(".shot, .main tr, .info, .sign, .head, .title")].filter(el=>!el.querySelector(".shots")).map(el=>{
+      const r=el.getBoundingClientRect();return [(r.top-s.top)*k,(r.bottom-s.top)*k];
+    }).filter(z=>z[1]-z[0]>4);
+  }
+
   async function captureSheet(sheet){
     const inFrame=window.top!==window.self;
     const isSafari=/^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent);
@@ -734,7 +744,7 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
           let c=await window.htmlToImage.toCanvas(sheet,opts);
           if(isSafari){c=await window.htmlToImage.toCanvas(sheet,opts);}
           c.getContext("2d").getImageData(0,0,1,1);
-          if(c.width>10&&c.height>10){paintImages(c,sheet,w,h);return c;}
+          if(c.width>10&&c.height>10){paintImages(c,sheet,w,h);c._avoid=avoidZones(sheet,c.height/h);return c;}
         }catch(e){console.warn("native capture failed",e);}
       }
       return await window.html2canvas(sheet,{scale:pr,backgroundColor:"#ffffff",useCORS:true,windowWidth:900,
@@ -777,9 +787,19 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
       const pdf=new jsPDF({unit:"mm",format:"a4",orientation:"portrait"});
       const pw=210,ph=297,m=6;
       const iw=pw-2*m, pxPerMm=canvas.width/iw, pageHpx=Math.floor((ph-2*m)*pxPerMm);
+      const zones=canvas._avoid||[];
       let y=0,first=true;
       while(y<canvas.height){
-        const h=Math.min(pageHpx,canvas.height-y);
+        let h=Math.min(pageHpx,canvas.height-y);
+        if(y+h<canvas.height){
+          let cut=y+h;
+          // move the cut up above any photo or row it would split (small items only)
+          for(let pass=0;pass<4;pass++){
+            const z=zones.find(z=>z[0]<cut-2&&z[1]>cut+2&&(z[1]-z[0])<pageHpx*0.9&&z[0]>y+pageHpx*0.25);
+            if(!z)break;cut=Math.floor(z[0])-4;
+          }
+          h=cut-y;
+        }
         const part=document.createElement("canvas");part.width=canvas.width;part.height=h;
         const ctx=part.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,part.width,h);
         ctx.drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
