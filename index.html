@@ -106,6 +106,17 @@ input[type=file]{display:none}
     <button type="button" id="noClear">إلغاء</button>
   </div>
 
+  <div class="imgout" id="pdfOut" hidden>
+    <div class="imgout-top">
+      <div>
+        <b>ملف PDF جاهز</b>
+        <p>اضغطي الزر لحفظ الملف. في الآيفون اختاري «حفظ في الملفات» أو أرسليه مباشرة عبر الواتساب أو الإيميل.</p>
+      </div>
+      <button type="button" id="pdfClose">إغلاق</button>
+    </div>
+    <button type="button" class="primary" id="pdfSave">حفظ ملف PDF</button>
+  </div>
+
   <div class="imgout" id="imgOut" hidden>
     <div class="imgout-top">
       <div>
@@ -704,7 +715,23 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
     $("shots").innerHTML="";$("confirmBox").hidden=true;save();say("تم مسح بيانات الطالبة والصور، وأُعيدت بيانات الاستراتيجية الأصلية.");
   };
 
-  let dl=null;
+  let dl=null, pdfReady=null;
+  $("pdfClose").onclick=()=>{$("pdfOut").hidden=true;};
+  $("pdfSave").onclick=async()=>{
+    if(!pdfReady)return;
+    const {blob,name}=pdfReady;
+    try{
+      const file=new File([blob],name,{type:"application/pdf"});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:name});
+        say("تم. اختاري «حفظ في الملفات» أو أرسليه مباشرة.");return;
+      }
+    }catch(err){if(err&&err.name==="AbortError"){say("أُلغي الحفظ.");return;}}
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");a.href=url;a.download=name;a.target="_blank";a.rel="noopener";
+    document.body.appendChild(a);a.click();a.remove();
+    say("تم تنزيل ملف PDF. إذا فُتح الملف في صفحة جديدة اضغطي زر المشاركة ثم «حفظ في الملفات».");
+  };
   if(window.claude&&window.claude.use){window.claude.use("downloads").then(n=>{dl=n;}).catch(()=>{});}
 
   async function captureSheet(sheet){
@@ -762,8 +789,9 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
       const showImg=()=>{$("imgOutImg").src=canvas.toDataURL("image/jpeg",0.92);$("imgOut").hidden=false;$("imgOut").scrollIntoView({behavior:"smooth",block:"start"});say("");};
       if(!dl){
         if(window.top===window.self){
-          const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
-          say("تم تنزيل ملف PDF.");return;
+          pdfReady={blob,name};
+          $("pdfOut").hidden=false;$("pdfOut").scrollIntoView({behavior:"smooth",block:"start"});
+          say("ملف PDF جاهز. اضغطي «حفظ ملف PDF».");return;
         }
         showImg();return;
       }
