@@ -743,7 +743,8 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
     try{
       await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
       const w=sheet.offsetWidth,h=sheet.offsetHeight;
-      const pr=Math.max(1,Math.min(2,Math.sqrt(16000000/(w*h))));
+      const budget=isSafari?7000000:16000000;
+      const pr=Math.max(0.8,Math.min(2,Math.sqrt(budget/(w*h))));
       if(window.htmlToImage){
         try{
           const opts={pixelRatio:pr,backgroundColor:"#ffffff",width:w,height:h,skipFonts:inFrame,cacheBust:false,
@@ -786,11 +787,11 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
       const who=($("f_student").innerText||"").trim();
       const strat=STRATEGIES.find(x=>x.id===sel.value);
       const name="استمارة "+(strat?strat.label.split(" (")[0]:"استراتيجية")+(who?" - "+who:"")+".pdf";
-      const showImg=()=>{$("imgOutImg").src=canvas.toDataURL("image/jpeg",0.92);$("imgOut").hidden=false;$("imgOut").scrollIntoView({behavior:"smooth",block:"start"});say("");};
+      const showImg=()=>{$("pdfOut").hidden=true;$("imgOutImg").src=canvas.toDataURL("image/jpeg",0.92);$("imgOut").hidden=false;$("imgOut").scrollIntoView({behavior:"smooth",block:"start"});say("");};
       if(!dl){
         if(window.top===window.self){
           pdfReady={blob,name};
-          $("pdfOut").hidden=false;$("pdfOut").scrollIntoView({behavior:"smooth",block:"start"});
+          $("imgOut").hidden=true;$("pdfOut").hidden=false;$("pdfOut").scrollIntoView({behavior:"smooth",block:"start"});
           say("ملف PDF جاهز. اضغطي «حفظ ملف PDF».");return;
         }
         showImg();return;
