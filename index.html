@@ -734,6 +734,25 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
   };
   if(window.claude&&window.claude.use){window.claude.use("downloads").then(n=>{dl=n;}).catch(()=>{});}
 
+  // Safari often leaves photos out of the captured page, so draw each photo onto the canvas directly
+  async function readyImages(sheet){
+    const imgs=[...sheet.querySelectorAll("img")];
+    await Promise.all(imgs.map(i=>(i.decode?i.decode():Promise.resolve()).catch(()=>{})));
+  }
+  function paintImages(c,sheet,w,h){
+    const s=sheet.getBoundingClientRect(),sx=c.width/w,sy=c.height/h,ctx=c.getContext("2d");
+    sheet.querySelectorAll("img").forEach(img=>{
+      if(img.closest(".no-pdf")||!img.complete||!img.naturalWidth)return;
+      const r=img.getBoundingClientRect();if(r.width<2||r.height<2)return;
+      let dw=r.width,dh=r.height,dx=r.left-s.left,dy=r.top-s.top;
+      if(getComputedStyle(img).objectFit==="contain"){
+        const k=Math.min(r.width/img.naturalWidth,r.height/img.naturalHeight);
+        dw=img.naturalWidth*k;dh=img.naturalHeight*k;dx+=(r.width-dw)/2;dy+=(r.height-dh)/2;
+      }
+      try{ctx.drawImage(img,dx*sx,dy*sy,dw*sx,dh*sy);}catch(e){}
+    });
+  }
+
   async function captureSheet(sheet){
     const inFrame=window.top!==window.self;
     const isSafari=/^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent);
@@ -742,6 +761,7 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
     sheet.style.width="794px";sheet.style.maxWidth="none";sheet.style.boxShadow="none";
     try{
       await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+      await readyImages(sheet);
       const w=sheet.offsetWidth,h=sheet.offsetHeight;
       const budget=isSafari?7000000:16000000;
       const pr=Math.max(0.8,Math.min(2,Math.sqrt(budget/(w*h))));
@@ -752,7 +772,7 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
           let c=await window.htmlToImage.toCanvas(sheet,opts);
           if(isSafari){c=await window.htmlToImage.toCanvas(sheet,opts);}
           c.getContext("2d").getImageData(0,0,1,1);
-          if(c.width>10&&c.height>10)return c;
+          if(c.width>10&&c.height>10){paintImages(c,sheet,w,h);return c;}
         }catch(e){console.warn("native capture failed",e);}
       }
       return await window.html2canvas(sheet,{scale:pr,backgroundColor:"#ffffff",useCORS:true,windowWidth:900,
