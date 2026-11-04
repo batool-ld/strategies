@@ -745,7 +745,29 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
     }
   }
 
+  const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  let ready=null;
+  const LABEL="تصدير PDF";
+  function resetReady(){if(ready){ready=null;$("pdfBtn").textContent=LABEL;}}
+  document.addEventListener("input",resetReady,true);
+  sel.addEventListener("change",resetReady);
+  $("evIn").addEventListener("change",resetReady);
+  document.addEventListener("click",e=>{if(e.target.closest(".shot button"))resetReady();},true);
+  async function deliver(blob,name){
+    try{
+      const file=new File([blob],name,{type:"application/pdf"});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({files:[file],title:name});
+        say("تم تصدير ملف PDF.");return;
+      }
+    }catch(err){if(err&&err.name==="AbortError"){say("أُلغي التصدير.");return;}}
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();a.remove();
+    say("تم تصدير ملف PDF.");
+  }
+
   $("pdfBtn").onclick=async()=>{
+    if(ready){const r=ready;resetReady();await deliver(r.blob,r.name);return;}
     if(!(window.htmlToImage||window.html2canvas)||!window.jspdf){say("أدوات التصدير لم تُحمَّل بعد، انتظري ثوانٍ وأعيدي المحاولة.");return;}
     const btn=$("pdfBtn");btn.disabled=true;say("جارٍ تجهيز ملف PDF…");
     try{
@@ -769,11 +791,6 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
       const who=($("f_student").innerText||"").trim();
       const strat=STRATEGIES.find(x=>x.id===sel.value);
       const name="استمارة "+(strat?strat.label.split(" (")[0]:"استراتيجية")+(who?" - "+who:"")+".pdf";
-      const direct=()=>{
-        const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
-        document.body.appendChild(a);a.click();a.remove();
-        say("تم تصدير ملف PDF.");
-      };
       if(dl){
         try{await dl.save({filename:name,data:blob});say("تم تصدير ملف PDF.");return;}
         catch(err){
@@ -781,7 +798,13 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
           if(err&&err.code==="rate_limited"){say("هناك نافذة حفظ مفتوحة بالفعل، أكمليها أولاً.");return;}
         }
       }
-      direct();
+      if(isIOS){
+        ready={blob,name};
+        $("pdfBtn").textContent="⬇ تحميل ملف PDF";
+        say("الملف جاهز، اضغطي «تحميل ملف PDF».");
+        return;
+      }
+      await deliver(blob,name);
     }catch(err){say("حدث خطأ أثناء تجهيز الملف. أعيدي المحاولة.");}
     finally{btn.disabled=false;}
   };
