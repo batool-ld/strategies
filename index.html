@@ -1,0 +1,781 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>استمارة استراتيجيات صعوبات التعلم</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: a strategy picker above one A4 paper sheet on a quiet desk surface. */
+:root{
+  --desk:#e9eeec; --ink-ui:#1f2d2b; --muted:#5d6d6a; --btn:#2f5f5a; --btn-ink:#ffffff; --line-ui:#cdd8d5; --pick:#ffffff;
+  --paper:#ffffff; --ink:#26302d; --band:#24574a; --label:#eef3ee; --label-ink:#24574a; --rule:#c9d6d0; --soft:#f6f9f7; --muted-ink:#6b7a75;
+  --f-body:"Tajawal","Segoe UI","Tahoma",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--desk:#151c1b;--ink-ui:#e4ecea;--muted:#9fb0ac;--btn:#5fa49b;--btn-ink:#0f1716;--line-ui:#2c3836;--pick:#1e2826;color-scheme:dark}}
+:root[data-theme="dark"]{--desk:#151c1b;--ink-ui:#e4ecea;--muted:#9fb0ac;--btn:#5fa49b;--btn-ink:#0f1716;--line-ui:#2c3836;--pick:#1e2826;color-scheme:dark}
+html,body{background:var(--desk)}
+body{color:var(--ink-ui);font-family:var(--f-body);direction:rtl;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.bar>div{min-width:0}
+.bar h1{font-size:17px;font-weight:700;margin:0}
+.bar p{margin:2px 0 0;font-size:13px;color:var(--muted);line-height:1.7}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{font-family:inherit;font-size:14px;font-weight:700;border-radius:8px;padding:10px 16px;cursor:pointer;border:1px solid var(--line-ui);background:transparent;color:var(--ink-ui)}
+button.primary{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+button:focus-visible,select:focus-visible,[contenteditable]:focus-visible{outline:2px solid var(--btn);outline-offset:2px}
+button:disabled{opacity:.6;cursor:wait}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}
+.nojs{background:#fdecc8;color:#5a3a00;border:1px solid #e6c27a;border-radius:10px;padding:12px 14px;font-weight:700;line-height:1.7}
+.picker{display:flex;flex-direction:column;gap:6px;background:var(--pick);border:1px solid var(--line-ui);border-radius:10px;padding:12px 14px}
+.picker label{font-size:14px;font-weight:700}
+.picker select{font-family:inherit;font-size:16px;font-weight:700;padding:10px 12px;border-radius:8px;border:1.5px solid var(--btn);background:var(--pick);color:var(--ink-ui);width:100%;max-width:100%}
+.picker small{font-size:12.5px;color:var(--muted)}
+
+.sheet{background:var(--paper);color:var(--ink);width:100%;box-shadow:0 1px 3px rgba(0,0,0,.12);padding:22px 26px 28px;box-sizing:border-box;border-top:14px solid var(--band);border-bottom:14px solid var(--band)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.head .org{font-size:14px;font-weight:700;line-height:1.8;color:var(--band)}
+.logo{width:120px;height:80px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo img{max-width:100%;max-height:100%;object-fit:contain}
+.title{color:var(--band);text-align:center;font-size:22px;font-weight:800;padding:4px 12px 12px;margin:18px auto 20px;text-wrap:balance;border-bottom:2px solid var(--band);width:fit-content;max-width:100%}
+.tscroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid var(--rule);padding:9px 11px;vertical-align:top;text-align:right}
+th{background:var(--label);color:var(--label-ink);font-weight:700}
+.info th{text-align:center}
+.info td{height:38px}
+.info{margin-bottom:18px}
+.main th{width:30%}
+.f{min-height:1.6em;outline:none;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+.info .f{text-align:center}
+.f:empty::before{content:attr(data-ph);color:#9aa5a3}
+.ev-row{display:flex;gap:6px;align-items:baseline;margin-bottom:6px}
+.ev-row b{flex-shrink:0;font-weight:700;color:var(--label-ink)}
+.ev-row .f{flex:1;min-width:0}
+.sub{display:block;font-weight:500;font-size:13px;margin-top:6px;color:var(--muted-ink)}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.shot{position:relative;border:1px solid #d9e0de;background:#fafbfa;display:flex;align-items:center;justify-content:center}
+.shot img{width:100%;height:auto;display:block}
+.shot button{position:absolute;top:4px;left:4px;padding:2px 8px;font-size:12px;background:rgba(255,255,255,.92);color:#8a1f1f;border-color:#e3c4c4}
+.addev{margin-top:8px;display:inline-block;font-size:13px;padding:7px 12px;background:var(--soft);color:var(--band);border:1px dashed #9db8ad;border-radius:6px;cursor:pointer}
+.sign{margin-top:22px}
+.sign th{text-align:center}
+.sign td{text-align:center;font-weight:700}
+.imgout{border:1px solid var(--line-ui);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--desk)}
+.imgout-top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.imgout-top>div{min-width:0}
+.imgout b{font-size:15px}
+.imgout p{margin:4px 0 0;font-size:13px;color:var(--muted);line-height:1.7}
+.imgout img{width:100%;height:auto;border:1px solid var(--line-ui);background:#fff}
+input[type=file]{display:none}
+@media (max-width:560px){
+  .sheet{padding:14px 12px 18px}
+  .title{font-size:18px}
+  .head .org{font-size:12px}
+  .logo{width:84px;height:56px}
+  table{font-size:13px}
+  .shots{grid-template-columns:minmax(0,1fr)}
+}
+.cap .no-pdf{display:none!important}
+.cap .f,.cap td,.cap th{word-break:normal!important;overflow-wrap:normal!important;letter-spacing:0!important}
+.cap .f:empty::before{content:""}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="bar">
+    <div>
+      <h1>استمارة تنفيذ استراتيجية تعليمية</h1>
+      <p>اختاري الاستراتيجية من القائمة فتتعبأ بياناتها تلقائيًا. اكتبي بيانات الطالبة، وعدّلي أي خانة بالكتابة فيها، وأضيفي صور الشواهد، ثم اضغطي «تصدير PDF».</p>
+    </div>
+    <div class="actions">
+      <button type="button" id="clearBtn">تفريغ الاستمارة</button>
+      <button type="button" class="primary" id="pdfBtn">تصدير PDF</button>
+    </div>
+  </div>
+
+  <div class="nojs" id="noJs">هذه معاينة فقط ولن تعمل القائمة فيها. افتحي الملف في متصفح Safari أو Chrome (من زر المشاركة اختاري «فتح في…»).</div>
+  <div class="picker">
+    <label for="stratSel">الاستراتيجية</label>
+    <select id="stratSel"><optgroup label="استراتيجيات عامة"><option value="direct">التدريس المباشر (التعليم الصريح)</option><option value="modeling">استراتيجية النمذجة</option><option value="sensory">استراتيجية الربط الحسي</option><option value="taskanalysis">استراتيجية تحليل المهارة</option><option value="play">استراتيجية التعلم باللعب</option><option value="venn">استراتيجية مخطط فن</option><option value="frayer">نموذج فراير</option><option value="exitcard">استراتيجية بطاقة الخروج</option><option value="roleplay">استراتيجية لعب الأدوار</option></optgroup><optgroup label="القراءة والكتابة والإملاء"><option value="fitzgerald">استراتيجية فتزجيرالد</option><option value="horn">استراتيجية هورن</option><option value="cloze">استراتيجية الإغلاق</option><option value="visualize">استراتيجية التصور البصري</option><option value="saywrite">استراتيجية قل واكتب</option><option value="spelling">استراتيجية تطوير مهارة التهجي</option><option value="pyramid">الطريقة الهرمية (للقراءة)</option><option value="tanweensound">استراتيجية صوت التنوين</option><option value="tanweenmulti">استراتيجية تعدد الحواس لقراءة التنوين</option><option value="phonics">الطريقة الصوتية اللغوية</option><option value="colors">استراتيجية الألوان في القراءة</option><option value="lookcover">استراتيجية حجب الكلمة وكتابتها</option><option value="slowing">استراتيجية التباطؤ التدريجي</option><option value="tanweenwrite">استراتيجية التدرج في كتابة التنوين</option><option value="auditory">استراتيجية التدريب السمعي</option><option value="orton">طريقة أورتن - جلنجهام</option><option value="fernald">طريقة فرنالد</option><option value="revive">طريقة إنعاش القراءة</option><option value="fernaldspell">طريقة فرنالد في الإملاء (الحواس المتعددة)</option><option value="gillingham">طريقة جلنجهام وستلمان</option><option value="johnson">أسلوب جونسون ومايكلبست</option><option value="completion">أسلوب الإكمال</option><option value="verbalvisual">الطريقة اللفظية البصرية</option><option value="problemsolving">استراتيجية حل المشكلات</option></optgroup><optgroup label="التعلم النشط والتعاوني"><option value="discussion">استراتيجية المناقشة</option><option value="cartoon">استراتيجية المفاهيم الكرتونية</option><option value="play">استراتيجية التعلم باللعب</option><option value="standup">استراتيجية قف ارفع يدك شارك</option><option value="coach">استراتيجية المدرب</option><option value="alternate">استراتيجية التعاقب</option><option value="showcards">استراتيجية المواجهة (اكشف أوراقك)</option><option value="fancard">استراتيجية البطاقة المروحية</option><option value="infogap">استراتيجية فجوة المعلومات</option><option value="thinkaloud">تفكير الأقران بصوت مسموع في حل المشكلات</option><option value="cardq">استراتيجية أسئلة البطاقات</option><option value="listenread">استراتيجية استمع - اقرأ - ناقش</option><option value="activereader">استراتيجية القارئ النشط</option><option value="magnet">استراتيجية ملخصات المغناطيس</option><option value="oneminute">استراتيجية الدقيقة الواحدة</option></optgroup><optgroup label="الرياضيات"><option value="cra">التدرج من المحسوس إلى المجرد (CRA)</option><option value="thinkaloud">تفكير الأقران بصوت مسموع في حل المشكلات</option><option value="problemsolving">استراتيجية حل المشكلات</option></optgroup></select>
+    <small>عند تغيير الاستراتيجية تُستبدل خانات الوصف والأهداف والإجراءات والأدوات والتقييم ببيانات الاستراتيجية الجديدة.</small>
+  </div>
+
+  <div class="status" id="status" role="status"></div>
+  <div class="status" id="confirmBox" hidden>
+    هل تريدين مسح بيانات الطالبة والصور؟
+    <button type="button" id="yesClear">نعم، امسحي</button>
+    <button type="button" id="noClear">إلغاء</button>
+  </div>
+
+  <div class="imgout" id="imgOut" hidden>
+    <div class="imgout-top">
+      <div>
+        <b>التقرير جاهز كصورة</b>
+        <p>حفظ PDF غير متاح في هذا المتصفح. احفظي الصورة: في الجوال اضغطي مطولاً على الصورة واختاري «حفظ الصورة»، وفي الكمبيوتر اضغطي بزر الفأرة الأيمن واختاري «حفظ الصورة باسم».</p>
+      </div>
+      <button type="button" id="imgClose">إغلاق</button>
+    </div>
+    <img id="imgOutImg" alt="صورة التقرير بعد التعبئة">
+  </div>
+
+  <div class="sheet" id="sheet">
+    <div class="head">
+      <div class="org">
+        المملكة العربية السعودية<br>
+        وزارة التعليم<br>
+        <span class="f" contenteditable="true" id="f_school" data-ph="اسم المدرسة" style="display:inline-block;min-width:8em"></span>
+      </div>
+      <div class="logo"><img id="logoImg" alt="شعار وزارة التعليم" src="data:image/jpeg;base64,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"></div>
+    </div>
+
+    <div class="title">استمارة تنفيذ استراتيجية تعليمية</div>
+
+    <div class="tscroll">
+    <table class="info">
+      <tr><th>اسم الطالبة</th><th>الصف</th><th>المادة - المهارة</th><th>اليوم</th><th>التاريخ</th></tr>
+      <tr>
+        <td><div class="f" contenteditable="true" id="f_student" data-ph="…"></div></td>
+        <td><div class="f" contenteditable="true" id="f_grade" data-ph="…"></div></td>
+        <td><div class="f" contenteditable="true" id="f_skill" data-ph="…"></div></td>
+        <td><div class="f" contenteditable="true" id="f_day" data-ph="…"></div></td>
+        <td><div class="f" contenteditable="true" id="f_date" data-ph="   /   /١٤٤٨هـ"></div></td>
+      </tr>
+    </table>
+    </div>
+
+    <table class="main">
+      <tr><th>اسم الاستراتيجية التعليمية</th><td><div class="f" contenteditable="true" id="f_name">استراتيجية التدريس المباشر (التعليم الصريح)</div></td></tr>
+      <tr><th>وصف الاستراتيجية</th><td><div class="f" contenteditable="true" id="f_desc">استراتيجية تدريس منظمة تقودها المعلمة، تُقدَّم فيها المهارة بخطوات صغيرة متسلسلة وواضحة، وفق نموذج «أنا أعمل، نحن نعمل، أنتِ تعملين»: تنمذج المعلمة المهارة أمام الطالبة مع التفكير بصوت مسموع، ثم تمارسها الطالبة بتوجيه ودعم، ثم تطبقها مستقلة. وتُعد من أكثر الاستراتيجيات فاعلية لذوي صعوبات التعلم لأنها تقلل الغموض، وتوفر تكرارًا كافيًا وتغذية راجعة فورية حتى الإتقان.</div></td></tr>
+      <tr><th>أهداف تطبيق الاستراتيجية</th><td><div class="f" contenteditable="true" id="f_goals">١- أن تكتسب الطالبة المهارة المستهدفة بخطوات صغيرة متتابعة وواضحة.
+٢- أن تؤدي الطالبة المهارة بمساعدة المعلمة ثم بصورة مستقلة.
+٣- أن تصل الطالبة إلى مستوى الإتقان المحدد (٨٠٪ فأكثر) في المهارة.
+٤- أن تحتفظ الطالبة بالمهارة وتعممها في مواقف جديدة.</div></td></tr>
+      <tr><th>إجراءات التطبيق</th><td><div class="f" contenteditable="true" id="f_steps">١- التهيئة: مراجعة المهارة السابقة المرتبطة، وتوضيح هدف الدرس للطالبة بلغة بسيطة.
+٢- النمذجة (أنا أعمل): تعرض المعلمة المهارة خطوة خطوة مع التفكير بصوت مسموع، مستخدمة أمثلة واضحة.
+٣- الممارسة الموجهة (نحن نعمل): تؤدي الطالبة المهارة مع المعلمة، مع التلميح والتوجيه وطرح الأسئلة المتكررة.
+٤- التغذية الراجعة الفورية: تعزيز الإجابة الصحيحة، وتصحيح الخطأ مباشرة بإعادة النمذجة.
+٥- الممارسة المستقلة (أنتِ تعملين): تطبق الطالبة المهارة وحدها في نشاط أو ورقة عمل.
+٦- التقويم والمراجعة: قياس مستوى الإتقان، ومراجعة المهارة دوريًا لضمان الاحتفاظ بها.</div></td></tr>
+      <tr><th>الأدوات والوسائل التعليمية المعينة</th><td><div class="f" contenteditable="true" id="f_tools">بطاقات تعليمية، سبورة صغيرة وأقلام، أوراق عمل متدرجة، نماذج وأمثلة محلولة، عرض تفاعلي، لوحة تعزيز ونجوم.</div></td></tr>
+      <tr>
+        <th>تقييم فعاليتها<span class="sub">(صعوبات - توصيات - إيجابيات)</span></th>
+        <td>
+          <div class="ev-row"><b>إيجابيات:</b><div class="f" contenteditable="true" id="f_pos">وضوح الخطوات قلّل تشتت الطالبة وارتباكها، وساعدت النمذجة على فهم المطلوب بدقة، ورفعت التغذية الراجعة الفورية ثقتها بنفسها، وتحسّنت دقة أدائها في المهارة.</div></div>
+          <div class="ev-row"><b>صعوبات:</b><div class="f" contenteditable="true" id="f_dif">احتاجت الطالبة تكرارًا أكثر في مرحلة الممارسة الموجهة، وتأخر انتقالها إلى الأداء المستقل في بعض الخطوات.</div></div>
+          <div class="ev-row"><b>توصيات:</b><div class="f" contenteditable="true" id="f_rec">تقسيم المهارة إلى خطوات أصغر عند الحاجة، وزيادة فرص الممارسة الموجهة، والمراجعة اليومية القصيرة، ودمج أنشطة حسية أو ألعاب تعليمية لزيادة الدافعية.</div></div>
+        </td>
+      </tr>
+      <tr>
+        <th>الشواهد</th>
+        <td>
+          <div class="shots" id="shots"></div>
+          <label class="addev no-pdf" for="evIn">＋ إضافة صور الشواهد</label>
+          <input type="file" id="evIn" accept="image/*" multiple>
+        </td>
+      </tr>
+    </table>
+
+    <table class="sign">
+      <tr><th>اسم المعلمة</th><th>مديرة المدرسة</th></tr>
+      <tr>
+        <td><div class="f" contenteditable="true" id="f_teacher" data-ph="…"></div></td>
+        <td><div class="f" contenteditable="true" id="f_principal" data-ph="…"></div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ===== بيانات الاستراتيجيات — تُضاف الاستراتيجيات الجديدة هنا ===== */
+const STRATEGIES = [
+{
+  g:"gen",id:"direct",
+  label:"التدريس المباشر (التعليم الصريح)",
+  name:"استراتيجية التدريس المباشر (التعليم الصريح)",
+  desc:"استراتيجية تدريس منظمة تقودها المعلمة، تُقدَّم فيها المهارة بخطوات صغيرة متسلسلة وواضحة، وفق نموذج «أنا أعمل، نحن نعمل، أنتِ تعملين»: تنمذج المعلمة المهارة أمام الطالبة مع التفكير بصوت مسموع، ثم تمارسها الطالبة بتوجيه ودعم، ثم تطبقها مستقلة. وتُعد من أكثر الاستراتيجيات فاعلية لذوي صعوبات التعلم لأنها تقلل الغموض، وتوفر تكرارًا كافيًا وتغذية راجعة فورية حتى الإتقان.",
+  goals:"١- أن تكتسب الطالبة المهارة المستهدفة بخطوات صغيرة متتابعة وواضحة.\n٢- أن تؤدي الطالبة المهارة بمساعدة المعلمة ثم بصورة مستقلة.\n٣- أن تصل الطالبة إلى مستوى الإتقان المحدد (٨٠٪ فأكثر) في المهارة.\n٤- أن تحتفظ الطالبة بالمهارة وتعممها في مواقف جديدة.",
+  steps:"١- التهيئة: مراجعة المهارة السابقة المرتبطة، وتوضيح هدف الدرس للطالبة بلغة بسيطة.\n٢- النمذجة (أنا أعمل): تعرض المعلمة المهارة خطوة خطوة مع التفكير بصوت مسموع، مستخدمة أمثلة واضحة.\n٣- الممارسة الموجهة (نحن نعمل): تؤدي الطالبة المهارة مع المعلمة، مع التلميح والتوجيه وطرح الأسئلة المتكررة.\n٤- التغذية الراجعة الفورية: تعزيز الإجابة الصحيحة، وتصحيح الخطأ مباشرة بإعادة النمذجة.\n٥- الممارسة المستقلة (أنتِ تعملين): تطبق الطالبة المهارة وحدها في نشاط أو ورقة عمل.\n٦- التقويم والمراجعة: قياس مستوى الإتقان، ومراجعة المهارة دوريًا لضمان الاحتفاظ بها.",
+  tools:"بطاقات تعليمية، سبورة صغيرة وأقلام، أوراق عمل متدرجة، نماذج وأمثلة محلولة، عرض تفاعلي، لوحة تعزيز ونجوم.",
+  pos:"وضوح الخطوات قلّل تشتت الطالبة وارتباكها، وساعدت النمذجة على فهم المطلوب بدقة، ورفعت التغذية الراجعة الفورية ثقتها بنفسها، وتحسّنت دقة أدائها في المهارة.",
+  dif:"احتاجت الطالبة تكرارًا أكثر في مرحلة الممارسة الموجهة، وتأخر انتقالها إلى الأداء المستقل في بعض الخطوات.",
+  rec:"تقسيم المهارة إلى خطوات أصغر عند الحاجة، وزيادة فرص الممارسة الموجهة، والمراجعة اليومية القصيرة، ودمج أنشطة حسية أو ألعاب تعليمية لزيادة الدافعية."
+},
+{
+  g:"math",id:"cra",
+  label:"التدرج من المحسوس إلى المجرد (CRA)",
+  name:"استراتيجية التدرج من المحسوس إلى شبه المحسوس إلى المجرد (CRA)",
+  desc:"استراتيجية تدريس قائمة على نظرية برونر، تنتقل فيها الطالبة بالمفهوم الرياضي عبر ثلاث مراحل متتابعة: المحسوس (التعامل بأشياء حقيقية كالمكعبات)، ثم شبه المحسوس (التعامل بالصور والرسوم)، ثم المجرد (التعامل بالأرقام والرموز). وتُعد من الاستراتيجيات المثبتة بالأبحاث في تدريس الرياضيات لذوي صعوبات التعلم، لأنها تبني الفهم قبل الرمز وتربط العدد بكميته.",
+  goals:"١- أن تفهم الطالبة المفهوم الرياضي فهمًا حقيقيًا يربط الرمز بمعناه.\n٢- أن تؤدي الطالبة المهارة بالمحسوسات، ثم بالصور، ثم بالأرقام والرموز.\n٣- أن تؤدي الطالبة المهارة في المرحلة المجردة دون الحاجة إلى وسيلة محسوسة.\n٤- أن تحتفظ الطالبة بالمفهوم وتطبقه في مواقف جديدة.",
+  steps:"١- المرحلة المحسوسة: تتعامل الطالبة مع المفهوم بأشياء حقيقية (مكعبات، عيدان، خرز، عدادات) وتعالجها بيدها.\n٢- الربط اللفظي: تصف المعلمة ما تفعله الطالبة بعبارات واضحة تربط الحركة بالمفهوم.\n٣- المرحلة شبه المحسوسة: يُعرض المفهوم بالصور والرسوم والنقاط والخطوط، وتؤدي الطالبة المهارة عليها.\n٤- المرحلة المجردة: تؤدي الطالبة المهارة بالأرقام والرموز فقط.\n٥- التغذية الراجعة الفورية والتعزيز بعد كل محاولة، والعودة إلى المرحلة السابقة عند الخطأ.\n٦- الانتقال للمرحلة التالية بعد إتقان المرحلة الحالية، ثم التطبيق في أنشطة متنوعة.",
+  tools:"مكعبات متداخلة ملونة، عيدان وخرز وعدادات، بطاقات صور وأعداد، خط الأعداد، الإطار العشري، عرض تفاعلي، أوراق عمل للمراحل الثلاث، نجوم تعزيز.",
+  pos:"ربطت الطالبة الرمز بمعناه الحقيقي فصار المفهوم محسوسًا وواضحًا لها، وانتقلت إلى الأرقام بثقة، وقلّت أخطاؤها، وزادت مشاركتها ومتعتها في التعلم.",
+  dif:"احتاجت المرحلة المحسوسة وقتًا أطول من الحصة، واحتاجت الطالبة تكرارًا في المرحلة شبه المحسوسة قبل الانتقال إلى المجرد.",
+  rec:"تجهيز المحسوسات مسبقًا لتوفير الوقت، وعدم الانتقال إلى المرحلة التالية قبل الإتقان، والعودة إلى المرحلة السابقة عند الخطأ، وتنويع الوسائل المحسوسة للحفاظ على الدافعية."
+},
+{g:"read",id:"fitzgerald",label:"استراتيجية فتزجيرالد",name:"استراتيجية فتزجيرالد (Fitzgerald) لتعلم كتابة الكلمات",
+desc:"طريقة لتعليم تهجئة الكلمات وكتابتها تعتمد على الدمج بين النظر والنطق والتخيل والكتابة، إذ تنظر الطالبة إلى الكلمة وتنطقها، ثم تغمض عينيها وتتخيل صورتها، ثم تكتبها من الذاكرة وتقارنها بالأصل. تناسب ذوات صعوبات التعلم لأنها تقوي الذاكرة البصرية للكلمة وتربطها بصوتها.",
+goals:"١- أن تتعرف الطالبة على الكلمة بصريًا وسمعيًا.\n٢- أن تستحضر الطالبة صورة الكلمة في ذهنها.\n٣- أن تكتب الطالبة الكلمة من الذاكرة كتابة صحيحة.\n٤- أن تكتشف الطالبة خطأها بالمقارنة وتصححه بنفسها.",
+steps:"١- تعرض المعلمة الكلمة مكتوبة بخط واضح وكبير.\n٢- تنطق المعلمة الكلمة، ثم تنطقها الطالبة وهي تنظر إليها.\n٣- تتهجى الطالبة حروف الكلمة بصوت مسموع وهي تشير إلى كل حرف.\n٤- تغمض الطالبة عينيها وتتخيل الكلمة وتتهجاها.\n٥- تُخفى الكلمة وتكتبها الطالبة من الذاكرة.\n٦- تقارن الطالبة ما كتبته بالأصل، وتعيد الخطوات عند الخطأ حتى تكتبها صحيحة ثلاث مرات.",
+tools:"بطاقات كلمات بخط كبير، سبورة صغيرة وأقلام، بطاقة حجب، دفتر تدريب، نجوم تعزيز.",
+pos:"تحسنت قدرة الطالبة على استحضار صورة الكلمة وكتابتها، وأصبحت تكتشف أخطاءها بنفسها عند المقارنة.",
+dif:"صعوبة التخيل البصري في البداية، واحتاجت الطالبة تكرارًا أكثر مع الكلمات الطويلة.",
+rec:"البدء بكلمات قصيرة مألوفة، وتلوين الحرف الصعب في الكلمة، والمراجعة اليومية للكلمات المتعلمة."},
+
+{g:"read",id:"horn",label:"استراتيجية هورن",name:"استراتيجية هورن (Horn) لتعلم الإملاء",
+desc:"طريقة متدرجة لتعلم تهجئة الكلمات تقوم على النطق الصحيح للكلمة، ثم النظر إلى كل حرف أثناء نطقه، ثم استرجاع الكلمة ذهنيًا، ثم كتابتها ومراجعتها. تعتمد على الحواس البصرية والسمعية والحركية، وتناسب ذوات صعوبات التعلم لأنها تقسم التعلم إلى خطوات قصيرة واضحة.",
+goals:"١- أن تنطق الطالبة الكلمة نطقًا صحيحًا.\n٢- أن تتعرف الطالبة على حروف الكلمة بالترتيب.\n٣- أن تسترجع الطالبة الكلمة ذهنيًا.\n٤- أن تكتب الطالبة الكلمة كتابة صحيحة دون نموذج.",
+steps:"١- تنطق الطالبة الكلمة بوضوح وهي تنظر إليها.\n٢- تنظر الطالبة إلى كل حرف وتنطقه.\n٣- تغمض عينيها وتحاول رؤية الكلمة في ذهنها.\n٤- تفتح عينيها وتتأكد من صحة ما تخيلته.\n٥- تكتب الكلمة دون النظر إليها.\n٦- تقارن ما كتبته بالنموذج، وتعيد الخطوات عند الخطأ.",
+tools:"بطاقات كلمات، سبورة صغيرة، أوراق تدريب، بطاقات تعزيز.",
+pos:"زادت دقة الطالبة في كتابة الكلمات، وأصبحت تراجع كتابتها قبل التسليم.",
+dif:"احتاجت الطالبة وقتًا أطول في مرحلة الاسترجاع الذهني.",
+rec:"تقليل عدد الكلمات في الجلسة الواحدة، واختيار كلمات من قاموس الطالبة اليومي، والمراجعة المتباعدة."},
+
+{g:"read",id:"cloze",label:"استراتيجية الإغلاق",name:"استراتيجية الإغلاق (Cloze)",
+desc:"استراتيجية تُحذف فيها حروف من الكلمة أو كلمات من الجملة أو النص، وتُكمل الطالبة الناقص اعتمادًا على السياق والمعنى. تنمي الفهم القرائي والانتباه للتفاصيل، وتساعد ذوات صعوبات التعلم على توظيف السياق في القراءة والكتابة.",
+goals:"١- أن تكمل الطالبة الحرف الناقص في الكلمة.\n٢- أن تكمل الطالبة الكلمة الناقصة في الجملة بما يناسب المعنى.\n٣- أن توظف الطالبة السياق في فهم المقروء.\n٤- أن تزيد دقة الطالبة في القراءة والكتابة.",
+steps:"١- تقرأ المعلمة الجملة أو النص كاملًا مع الطالبة.\n٢- تُعرض الجملة نفسها بعد حذف حرف أو كلمة.\n٣- تقرأ الطالبة الجملة وتفكر في الناقص بمساعدة المعنى.\n٤- تختار الطالبة الإجابة من بدائل (في البداية) ثم تكتبها دون بدائل.\n٥- تقرأ الطالبة الجملة كاملة بعد الإكمال للتأكد.\n٦- التغذية الراجعة والتعزيز، والتدرج من حذف حرف إلى حذف كلمة.",
+tools:"بطاقات جمل، أوراق عمل بفراغات، بطاقات بدائل، عرض تفاعلي، أقلام ملونة.",
+pos:"زاد انتباه الطالبة لمعنى الجملة، وتحسن توظيفها للسياق في القراءة.",
+dif:"صعوبة الإكمال دون بدائل في البداية.",
+rec:"البدء بحذف الحرف الأول ثم الأخير ثم الأوسط، وتقديم بدائل مصورة، والتدرج في عدد الفراغات."},
+
+{g:"read",id:"visualize",label:"استراتيجية التصور البصري",name:"استراتيجية التصور البصري",
+desc:"استراتيجية تدرب الطالبة على تكوين صورة ذهنية للحرف أو الكلمة أو المقروء، لتسهيل حفظها واسترجاعها وفهمها. تعتمد على تقوية الذاكرة البصرية، وتناسب الطالبات اللواتي يواجهن صعوبة في تذكر شكل الكلمة أو الحرف.",
+goals:"١- أن تكوّن الطالبة صورة ذهنية واضحة للحرف أو الكلمة.\n٢- أن تسترجع الطالبة شكل الكلمة دون النظر إليها.\n٣- أن تكتب الطالبة الكلمة كتابة صحيحة من الذاكرة.\n٤- أن تصف الطالبة ما تخيلته من المقروء بكلماتها.",
+steps:"١- تعرض المعلمة الكلمة أو الصورة بشكل واضح مع لفت الانتباه لتفاصيلها.\n٢- تتأمل الطالبة الكلمة وتصف شكل حروفها.\n٣- تغمض الطالبة عينيها وتتخيل الكلمة.\n٤- تصف الطالبة ما تراه في ذهنها أو ترسمه بإصبعها في الهواء.\n٥- تكتب الطالبة الكلمة ثم تقارنها بالأصل.\n٦- التعزيز والتكرار مع كلمات جديدة.",
+tools:"بطاقات كلمات وصور، لوحة عرض، صلصال، رمل للكتابة، سبورة صغيرة.",
+pos:"تحسنت قدرة الطالبة على تذكر شكل الكلمات وتمييز الحروف المتشابهة.",
+dif:"تشتت الانتباه أثناء التخيل، وصعوبة وصف الصورة الذهنية.",
+rec:"تقليل المشتتات في المكان، واستخدام الألوان لإبراز الحروف، وربط الكلمة بصورة معبرة."},
+
+{g:"read",id:"saywrite",label:"استراتيجية قل واكتب",name:"استراتيجية قل واكتب",
+desc:"استراتيجية تنطق فيها الطالبة الكلمة بصوت مسموع وتقطعها إلى أصواتها أو مقاطعها، ثم تكتب كل صوت تنطقه. تربط بين الصوت والحرف المكتوب، وتعالج أخطاء الحذف والإضافة والإبدال في الكتابة.",
+goals:"١- أن تنطق الطالبة الكلمة نطقًا صحيحًا.\n٢- أن تحلل الطالبة الكلمة إلى أصواتها أو مقاطعها.\n٣- أن تكتب الطالبة الحرف المناسب لكل صوت.\n٤- أن تقل أخطاء الحذف والإبدال في كتابتها.",
+steps:"١- تنطق المعلمة الكلمة ببطء ووضوح.\n٢- تكرر الطالبة نطق الكلمة.\n٣- تقطع الطالبة الكلمة إلى مقاطع وتصفق مع كل مقطع.\n٤- تقول الطالبة الصوت الأول ثم تكتبه، وتكمل بقية الأصوات بالترتيب.\n٥- تقرأ الطالبة ما كتبته للتأكد من مطابقته لما نطقته.\n٦- التغذية الراجعة والتعزيز.",
+tools:"بطاقات كلمات وصور، سبورة صغيرة، مربعات الأصوات، أوراق تدريب، نجوم تعزيز.",
+pos:"قلت أخطاء الحذف في كتابة الطالبة، وأصبحت تكتب وهي تنطق بثقة.",
+dif:"صعوبة في تقطيع الكلمات الطويلة، والخلط بين الأصوات المتقاربة.",
+rec:"البدء بالكلمات الثلاثية، واستخدام مربعات الأصوات، والتدريب على الأصوات المتقاربة بشكل منفصل."},
+
+{g:"read",id:"spelling",label:"استراتيجية تطوير مهارة التهجي",name:"استراتيجية تطوير مهارة التهجي",
+desc:"استراتيجية تنمي قدرة الطالبة على تحليل الكلمة إلى حروفها وأصواتها وتركيبها من جديد، شفهيًا ثم كتابيًا. تُعد التهجئة أساس القراءة والإملاء، وتحتاج ذوات صعوبات التعلم إلى تدريب منظم ومتدرج عليها.",
+goals:"١- أن تتهجى الطالبة الكلمة شفهيًا حرفًا حرفًا.\n٢- أن تحلل الطالبة الكلمة إلى مقاطع وأصوات.\n٣- أن تركب الطالبة الأصوات لتكوين كلمة.\n٤- أن تكتب الطالبة الكلمة كتابة صحيحة.",
+steps:"١- مراجعة أصوات الحروف وأشكالها.\n٢- تنطق المعلمة الكلمة وتتهجاها شفهيًا كنموذج.\n٣- تتهجى الطالبة الكلمة شفهيًا مع المعلمة ثم وحدها.\n٤- تحلل الطالبة الكلمة إلى مقاطع ثم إلى أصوات.\n٥- تركب الطالبة الأصوات لتكوّن الكلمة وتكتبها.\n٦- التطبيق على كلمات جديدة من النمط نفسه، والتعزيز.",
+tools:"بطاقات حروف متحركة، بطاقات مقاطع، لوحة جيوب، سبورة صغيرة، أوراق تدريب.",
+pos:"تحسنت قدرة الطالبة على التحليل والتركيب، وانعكس ذلك على قراءتها وكتابتها.",
+dif:"صعوبة في التهجي الشفهي للكلمات التي فيها مدود أو حروف شمسية.",
+rec:"التدرج من الكلمات البسيطة إلى المركبة، وتخصيص تدريب منفصل للمدود واللام الشمسية والقمرية."},
+
+{g:"read",id:"pyramid",label:"الطريقة الهرمية (للقراءة)",name:"الطريقة الهرمية (للقراءة)",
+desc:"طريقة لتعليم قراءة الكلمات الطويلة أو الصعبة، تُحلَّل فيها الكلمة إلى حروفها، ثم تُجزأ إلى مجموعات صغيرة، وتقرأ الطالبة المجموعة الأولى، ثم الأولى والثانية، ثم الأولى والثانية والثالثة حتى تصل إلى الكلمة كاملة، فيتكون شكل هرمي متدرج.",
+goals:"١- أن تحلل الطالبة الكلمة إلى حروفها.\n٢- أن تقرأ الطالبة أجزاء الكلمة متدرجة.\n٣- أن تركب الطالبة الأجزاء لقراءة الكلمة كاملة.\n٤- أن تقرأ الطالبة الكلمات الطويلة دون حذف أو تقديم.",
+steps:"١- تقرأ المعلمة الكلمة بصوت واضح.\n٢- تحلل الكلمة للطالبة إلى حروف منفردة.\n٣- تقرأ الحروف على الطالبة وهي مشكولة بالحركات.\n٤- تطلب من الطالبة قراءة هذه الحروف.\n٥- تجزئ الحروف إلى مجموعات.\n٦- تقرأ الطالبة المجموعة الأولى ثم الثانية ثم الثالثة بشكل منفرد.\n٧- تقرأ الطالبة المجموعة الأولى فقط.\n٨- تقرأ الطالبة المجموعة الأولى والثانية.\n٩- تقرأ الطالبة المجموعة الأولى والثانية والثالثة (الكلمة كاملة).",
+tools:"بطاقات كلمات، لوحة الهرم، بطاقات حروف ومقاطع، أقلام ملونة لتلوين المجموعات.",
+pos:"سهّل التدرج قراءة الكلمات الطويلة، وقلت أخطاء الحذف والقلب.",
+dif:"صعوبة دمج المجموعات معًا في المرحلة الأخيرة.",
+rec:"تلوين كل مجموعة بلون مختلف، والبدء بكلمات من مجموعتين ثم ثلاث."},
+
+{g:"read",id:"tanweensound",label:"استراتيجية صوت التنوين",name:"استراتيجية صوت التنوين",
+desc:"استراتيجية تساعد الطالبة على إدراك أن التنوين صوت نون ساكنة تُنطق في آخر الكلمة ولا تُكتب، والتمييز بين أنواعه الثلاثة (تنوين الضم والفتح والكسر) سمعيًا ثم قراءة وكتابة.",
+goals:"١- أن تميز الطالبة صوت التنوين في آخر الكلمة سمعيًا.\n٢- أن تفرق الطالبة بين تنوين الضم والفتح والكسر.\n٣- أن تقرأ الطالبة الكلمة المنونة قراءة صحيحة.\n٤- أن تكتب الطالبة التنوين بشكله الصحيح دون كتابة النون.",
+steps:"١- تنطق المعلمة كلمة منونة مع إطالة صوت النون في آخرها.\n٢- تستمع الطالبة وتحدد هل تسمع صوت النون في آخر الكلمة.\n٣- تعرض المعلمة شكل التنوين وتوضح أن الصوت نون لكن الرسم حركتان.\n٤- تقرأ الطالبة كلمات منونة بأنواع التنوين الثلاثة.\n٥- تكتب الطالبة كلمات منونة مملاة.\n٦- التغذية الراجعة والتعزيز.",
+tools:"بطاقات كلمات منونة، بطاقات صور، تسجيلات صوتية، أوراق عمل، أقلام ملونة.",
+pos:"أصبحت الطالبة تميز صوت التنوين وتتوقف عن كتابة النون في آخر الكلمة.",
+dif:"الخلط بين تنوين الفتح وتنوين الضم في الكتابة.",
+rec:"تعليم كل نوع من التنوين منفصلًا، واستخدام لون مميز للتنوين، والربط بإشارات يدوية."},
+
+{g:"read",id:"tanweenmulti",label:"استراتيجية تعدد الحواس لقراءة التنوين",name:"استراتيجية تعدد الحواس لقراءة التنوين",
+desc:"استراتيجية توظف أكثر من حاسة (البصر، السمع، اللمس، الحركة) في تعليم قراءة الكلمات المنونة، لتثبيت شكل التنوين وصوته في ذاكرة الطالبة.",
+goals:"١- أن تتعرف الطالبة على شكل التنوين بأنواعه بصريًا ولمسيًا.\n٢- أن تربط الطالبة شكل التنوين بصوته.\n٣- أن تقرأ الطالبة الكلمات المنونة قراءة صحيحة.\n٤- أن تحتفظ الطالبة بالمهارة لفترة أطول.",
+steps:"١- تعرض المعلمة التنوين بشكل كبير وملون.\n٢- تتلمس الطالبة شكل التنوين المصنوع من مادة بارزة (صنفرة، صلصال).\n٣- تتتبع الطالبة شكل التنوين بإصبعها وهي تنطق صوته.\n٤- تؤدي الطالبة حركة مرتبطة بكل نوع من التنوين.\n٥- تقرأ الطالبة كلمات منونة وتكتبها في الرمل أو على السبورة.\n٦- التطبيق والتعزيز.",
+tools:"حروف وتنوين بارز من الصنفرة، صلصال، صينية رمل، بطاقات كلمات منونة، أقلام ملونة.",
+pos:"تفاعلت الطالبة مع الأنشطة الحسية وثبت شكل التنوين وصوته لديها.",
+dif:"استغرقت الأنشطة الحسية وقتًا أطول من الحصة.",
+rec:"تجهيز الوسائل الحسية مسبقًا، والتنويع بين الأنشطة، والتقليل التدريجي من الدعم الحسي."},
+
+{g:"read",id:"phonics",label:"الطريقة الصوتية اللغوية",name:"الطريقة الصوتية اللغوية",
+desc:"طريقة لتعليم القراءة تبدأ بتعليم أصوات الحروف لا أسمائها، ثم دمج الأصوات لتكوين مقاطع وكلمات. تنمي الوعي الصوتي وتعد أساسًا لعلاج صعوبات القراءة.",
+goals:"١- أن تنطق الطالبة أصوات الحروف بالحركات نطقًا صحيحًا.\n٢- أن تميز الطالبة الأصوات المتشابهة.\n٣- أن تدمج الطالبة الأصوات لتكوين كلمات.\n٤- أن تقرأ الطالبة كلمات جديدة بالاعتماد على الأصوات.",
+steps:"١- تعرض المعلمة الحرف وتنطق صوته مع كل حركة.\n٢- تكرر الطالبة الأصوات مع النظر إلى الحرف.\n٣- تميز الطالبة الصوت في بداية الكلمات ووسطها ونهايتها.\n٤- تدمج الطالبة صوتين ثم ثلاثة لتكوين مقطع وكلمة.\n٥- تقرأ الطالبة كلمات وجملًا قصيرة.\n٦- التغذية الراجعة والتعزيز.",
+tools:"بطاقات الحروف والأصوات، صور لكلمات، مرآة لمخارج الحروف، تسجيلات صوتية، أوراق عمل.",
+pos:"تحسن الوعي الصوتي لدى الطالبة، وأصبحت تحاول قراءة الكلمات الجديدة بنفسها.",
+dif:"صعوبة دمج الأصوات بسرعة لتكوين الكلمة.",
+rec:"التدريب اليومي على الدمج الشفهي قبل القراءة، والبدء بالحروف ذات الأصوات الممتدة."},
+
+{g:"read",id:"colors",label:"استراتيجية الألوان في القراءة",name:"استراتيجية الألوان في القراءة",
+desc:"استراتيجية تستخدم الألوان لتمييز الحروف أو الحركات أو المقاطع داخل الكلمة، لجذب انتباه الطالبة وتسهيل التمييز بين المتشابهات وتحليل الكلمة.",
+goals:"١- أن تميز الطالبة الحرف المستهدف داخل الكلمة.\n٢- أن تفرق الطالبة بين الحروف والحركات المتشابهة.\n٣- أن تقرأ الطالبة الكلمة مقطعًا مقطعًا.\n٤- أن تقرأ الطالبة الكلمة دون ألوان في النهاية.",
+steps:"١- تحدد المعلمة لونًا لكل عنصر (الحرف المستهدف، المد، الحركات أو المقاطع).\n٢- تعرض الكلمات ملونة وتقرأها كنموذج.\n٣- تقرأ الطالبة الكلمات الملونة.\n٤- تلون الطالبة بنفسها الحرف أو المقطع المطلوب في كلمات جديدة.\n٥- تقرأ الطالبة الكلمات نفسها دون ألوان.\n٦- التعزيز والتطبيق.",
+tools:"أقلام وألوان، بطاقات كلمات ملونة، أوراق عمل، عرض تفاعلي.",
+pos:"جذبت الألوان انتباه الطالبة وساعدتها على التمييز بين الحروف المتشابهة.",
+dif:"اعتماد الطالبة على اللون في البداية.",
+rec:"ثبات دلالة كل لون، والتقليل التدريجي من الألوان حتى القراءة دونها."},
+
+{g:"read",id:"lookcover",label:"استراتيجية حجب الكلمة وكتابتها",name:"استراتيجية حجب الكلمة وكتابتها (انظر - احجب - اكتب - تحقق)",
+desc:"استراتيجية لتعلم كتابة الكلمات تنظر فيها الطالبة إلى الكلمة وتنطقها، ثم تحجبها وتكتبها من الذاكرة، ثم تكشفها وتتحقق من صحة كتابتها. تقوي الذاكرة البصرية والتصحيح الذاتي.",
+goals:"١- أن تتذكر الطالبة شكل الكلمة بعد حجبها.\n٢- أن تكتب الطالبة الكلمة من الذاكرة كتابة صحيحة.\n٣- أن تصحح الطالبة أخطاءها بنفسها.\n٤- أن تحتفظ الطالبة بكتابة الكلمات لفترة أطول.",
+steps:"١- انظري: تنظر الطالبة إلى الكلمة وتنطقها وتتهجاها.\n٢- احجبي: تغطي الطالبة الكلمة ببطاقة.\n٣- اكتبي: تكتب الكلمة من الذاكرة.\n٤- تحققي: تكشف الكلمة وتقارنها بما كتبته.\n٥- عند الخطأ تعيد الخطوات حتى تكتبها صحيحة.\n٦- المراجعة في اليوم التالي والتعزيز.",
+tools:"ورقة مقسمة إلى أعمدة (انظر - احجب - اكتب - تحقق)، بطاقة حجب، بطاقات كلمات، أقلام.",
+pos:"أصبحت الطالبة تصحح أخطاءها بنفسها، وتحسنت كتابتها للكلمات المستهدفة.",
+dif:"محاولة الطالبة النظر إلى الكلمة أثناء الحجب.",
+rec:"استخدام بطاقة حجب ثابتة، والبدء بكلمات قصيرة، وتسجيل الكلمات المتقنة في سجل تقدم."},
+
+{g:"read",id:"slowing",label:"استراتيجية التباطؤ التدريجي",name:"استراتيجية التباطؤ (التأخير) التدريجي",
+desc:"استراتيجية لتعلم كتابة الكلمات تُطلب فيها الكتابة من الطالبة ثم يُعرض النموذج فورًا في البداية، ثم تزاد المدة الزمنية بين طلب الكتابة وعرض النموذج تدريجيًا (٥ ثوانٍ ثم أكثر)، مما يمنح الطالبة فرصة لتكتب من ذاكرتها قبل ظهور النموذج، ويقلل الأخطاء ويحقق الاستقلالية.",
+goals:"١- أن تكتب الطالبة الكلمة بمساعدة النموذج دون أخطاء.\n٢- أن تحاول الطالبة الكتابة من ذاكرتها قبل ظهور النموذج.\n٣- أن تقل حاجة الطالبة إلى النموذج تدريجيًا.\n٤- أن تكتب الطالبة الكلمة باستقلالية تامة.",
+steps:"١- تطلب المعلمة من الطالبة كتابة كلمات دون عرض نموذج لها، ثم تعرض النموذج فورًا دون فاصل زمني.\n٢- بعد عدة محاولات للخطوة الأولى تضع المعلمة فترة (٥ ثوانٍ) بين طلب الكتابة وعرض النموذج، مما يسمح للطالبة بالكتابة من ذاكرتها أو الانتظار.\n٣- تزيد المعلمة الوقت تدريجيًا بين طلب الكتابة وعرض النموذج.\n٤- بعد عدة محاولات للخطوة الثالثة تطلب المعلمة من الطالبة كتابة الكلمة دون نموذج.\n٥- التغذية الراجعة والتعزيز بعد كل محاولة.",
+tools:"بطاقات كلمات، مؤقت زمني، سبورة صغيرة، دفتر تدريب، بطاقات تعزيز.",
+pos:"قلت أخطاء الطالبة لأنها تجد النموذج عند الحاجة، وزادت ثقتها حتى كتبت دون نموذج.",
+dif:"استعجال الطالبة للنموذج وعدم محاولة الكتابة من ذاكرتها في البداية.",
+rec:"زيادة الفترة الزمنية ببطء، وتعزيز كل محاولة كتابة قبل ظهور النموذج."},
+
+{g:"read",id:"tanweenwrite",label:"استراتيجية التدرج في كتابة التنوين",name:"استراتيجية التدرج في كتابة التنوين",
+desc:"استراتيجية تعلم الطالبة كتابة التنوين بخطوات متدرجة: تمييزه سمعيًا، ثم التعرف على شكله، ثم كتابته منسوخًا، ثم منظورًا، ثم مملى، مع مراعاة قواعد كتابة تنوين الفتح وألفه.",
+goals:"١- أن تميز الطالبة نوع التنوين سمعيًا.\n٢- أن تكتب الطالبة التنوين بشكله الصحيح.\n٣- أن تكتب الطالبة ألف تنوين الفتح في موضعها.\n٤- أن تكتب الطالبة كلمات منونة مملاة كتابة صحيحة.",
+steps:"١- التمييز السمعي لنوع التنوين في كلمات منطوقة.\n٢- عرض شكل كل نوع من التنوين وتتبعه.\n٣- النسخ: تنسخ الطالبة كلمات منونة.\n٤- الكتابة المنظورة: تنظر الطالبة إلى الكلمة ثم تكتبها.\n٥- الإملاء: تكتب الطالبة كلمات منونة مملاة.\n٦- التصحيح الذاتي والتعزيز.",
+tools:"بطاقات كلمات منونة، أوراق نسخ متدرجة، سبورة صغيرة، أقلام ملونة.",
+pos:"تحسنت كتابة الطالبة للتنوين، وقل خلطها بينه وبين النون.",
+dif:"نسيان ألف تنوين الفتح أحيانًا.",
+rec:"تلوين ألف تنوين الفتح، والتدريب المنفصل على كل نوع، والمراجعة المستمرة."},
+
+{g:"read",id:"auditory",label:"استراتيجية التدريب السمعي",name:"استراتيجية التدريب السمعي",
+desc:"استراتيجية تعتمد على حاسة السمع في تعلم المهارة، إذ تشرح المعلمة المهارة وتقرأ نصًا ببطء وصوت واضح، وتستخرج الطالبة سماعيًا الكلمات التي توجد بها المهارة وتميز نوعها، ثم تكتبها غيبًا. تنمي الانتباه والتمييز والذاكرة السمعية.",
+goals:"١- أن تميز الطالبة المهارة المستهدفة سمعيًا.\n٢- أن تستخرج الطالبة من النص المسموع الكلمات التي تحتوي المهارة.\n٣- أن تميز الطالبة نوع المهارة في الكلمة المسموعة.\n٤- أن تكتب الطالبة الكلمات غيبًا كتابة صحيحة.",
+steps:"١- تقوم المعلمة بشرح المهارة أمام الطالبة.\n٢- بعد انتهاء الشرح تعطي الطالبة مجموعة من التمارين على المهارة لتقوم بحلها.\n٣- تقرأ المعلمة نصًا أمام الطالبة ببطء وصوت واضح.\n٤- تطلب من الطالبة أثناء قيامها بالقراءة استخراج الكلمات التي توجد بها المهارة وتبيين نوعها.\n٥- تكتب الطالبة هذه الكلمات على السبورة غيبًا.\n٦- التغذية الراجعة والتعزيز.",
+tools:"نصوص قصيرة، تسجيلات صوتية، سماعات، سبورة، بطاقات كلمات.",
+pos:"تحسن انتباه الطالبة السمعي، وأصبحت تميز المهارة في الكلمات المسموعة.",
+dif:"تأثر الطالبة بالضوضاء، وصعوبة المتابعة عند القراءة السريعة.",
+rec:"التطبيق في مكان هادئ، والقراءة ببطء مع التكرار، والبدء بنص قصير."},
+
+{g:"gen",id:"modeling",label:"استراتيجية النمذجة",name:"استراتيجية النمذجة",
+desc:"استراتيجية تؤدي فيها المعلمة المهارة أمام الطالبة كنموذج واضح، مع التفكير بصوت مسموع وشرح كل خطوة، ثم تقلدها الطالبة بدعم متدرج حتى تؤديها وحدها. تناسب ذوات صعوبات التعلم لأنها تجعل خطوات التفكير ظاهرة ومحسوسة.",
+goals:"١- أن تلاحظ الطالبة خطوات أداء المهارة.\n٢- أن تقلد الطالبة أداء المعلمة بدقة.\n٣- أن تؤدي الطالبة المهارة بشكل مستقل.\n٤- أن تشرح الطالبة الخطوات التي اتبعتها.",
+steps:"١- تحديد المهارة وتجزئتها إلى خطوات.\n٢- تؤدي المعلمة المهارة أمام الطالبة مع التفكير بصوت مسموع.\n٣- تؤدي الطالبة المهارة مع المعلمة.\n٤- تؤدي الطالبة المهارة بمساعدة جزئية وتلميحات.\n٥- تؤدي الطالبة المهارة وحدها وتشرح خطواتها.\n٦- التغذية الراجعة والتعزيز.",
+tools:"سبورة، بطاقات خطوات، نماذج محلولة، عرض تفاعلي، فيديو تعليمي قصير.",
+pos:"وضحت النمذجة خطوات المهارة للطالبة، وقلت حاجتها للمساعدة تدريجيًا.",
+dif:"اعتماد الطالبة على النموذج لفترة أطول من المتوقع.",
+rec:"سحب الدعم تدريجيًا، وتكرار النمذجة عند الخطأ، واستخدام بطاقات خطوات مصورة."},
+
+{g:"gen",id:"sensory",label:"استراتيجية الربط الحسي",name:"استراتيجية الربط الحسي",
+desc:"استراتيجية تربط المفهوم أو الحرف أو الكلمة بخبرة حسية ملموسة (صورة، حركة، شيء حقيقي، صوت)، لتسهيل الفهم والتذكر لدى ذوات صعوبات التعلم.",
+goals:"١- أن تربط الطالبة الحرف أو الكلمة بصورة أو شيء محسوس.\n٢- أن تتذكر الطالبة المعلومة بالاعتماد على الرابط الحسي.\n٣- أن تستخدم الطالبة أكثر من حاسة في التعلم.\n٤- أن تطبق الطالبة ما تعلمته دون الحاجة للرابط.",
+steps:"١- اختيار الرابط الحسي المناسب للمهارة (شيء حقيقي، صورة، حركة).\n٢- تعرض المعلمة الرابط مع الحرف أو الكلمة.\n٣- تتعامل الطالبة مع الرابط باللمس أو الحركة أو الرسم.\n٤- تربط الطالبة شفهيًا بين الرابط والمعلومة.\n٥- تطبق الطالبة المعلومة مع الرابط ثم دونه.\n٦- التعزيز والمراجعة.",
+tools:"مجسمات وأشياء حقيقية، بطاقات صور، صلصال، رمل، حروف بارزة.",
+pos:"تفاعلت الطالبة بحماس، وسهل الرابط الحسي تذكر المعلومة.",
+dif:"صعوبة الاستغناء عن الرابط الحسي في البداية.",
+rec:"اختيار روابط من بيئة الطالبة، والتقليل التدريجي من الاعتماد على الرابط."},
+
+{g:"gen",id:"taskanalysis",label:"استراتيجية تحليل المهارة",name:"استراتيجية تحليل المهارة",
+desc:"استراتيجية تُجزأ فيها المهارة المعقدة إلى مهارات فرعية صغيرة مرتبة، تتعلمها الطالبة واحدة تلو الأخرى حتى تتقن المهارة كاملة. تُعد من أسس التدريس في صعوبات التعلم وبناء الخطة الفردية.",
+goals:"١- أن تتقن الطالبة كل مهارة فرعية بالترتيب.\n٢- أن تربط الطالبة المهارات الفرعية لأداء المهارة كاملة.\n٣- أن تحدد المعلمة بدقة موضع الصعوبة لدى الطالبة.\n٤- أن تؤدي الطالبة المهارة الكاملة بشكل مستقل.",
+steps:"١- تحديد المهارة الرئيسة المستهدفة.\n٢- تجزئة المهارة إلى خطوات فرعية صغيرة مرتبة.\n٣- قياس أداء الطالبة في كل خطوة لتحديد نقطة البداية.\n٤- تعليم الخطوة الأولى غير المتقنة حتى الإتقان.\n٥- الانتقال للخطوة التالية وربطها بالسابقة.\n٦- أداء المهارة كاملة وتقويمها.",
+tools:"قائمة تحليل المهارة، بطاقات الخطوات، سجل متابعة، أوراق عمل متدرجة.",
+pos:"ساعد التحليل على تحديد موضع الصعوبة بدقة، وشعرت الطالبة بالإنجاز مع كل خطوة.",
+dif:"احتاج التحليل وقتًا في الإعداد، وطالت مدة الوصول للمهارة الكاملة.",
+rec:"إعداد قوائم تحليل جاهزة للمهارات المتكررة، وتسجيل التقدم في كل خطوة."},
+
+{g:"read",id:"orton",label:"طريقة أورتن - جلنجهام",name:"طريقة أورتن - جلنجهام (Orton-Gillingham)",
+desc:"طريقة متعددة الحواس منظمة ومتسلسلة لتعليم القراءة والكتابة، تربط بين صوت الحرف وشكله وحركة كتابته في وقت واحد (بصري، سمعي، حركي، لمسي). تُعد من أشهر الطرق العلاجية لعسر القراءة.",
+goals:"١- أن تربط الطالبة صوت الحرف بشكله وحركة كتابته.\n٢- أن تقرأ الطالبة المقاطع والكلمات بالدمج الصوتي.\n٣- أن تكتب الطالبة الكلمات بالتحليل الصوتي.\n٤- أن تتقن الطالبة المهارة قبل الانتقال لما بعدها.",
+steps:"١- تعرض المعلمة بطاقة الحرف وتنطق صوته (بصري - سمعي).\n٢- تكرر الطالبة الصوت وهي تنظر إلى الحرف.\n٣- تكتب الطالبة الحرف في الهواء ثم على الرمل وهي تنطق صوته (حركي - لمسي).\n٤- تدمج الطالبة الأصوات لقراءة مقاطع وكلمات.\n٥- تكتب الطالبة كلمات مملاة بالتحليل الصوتي.\n٦- المراجعة التراكمية لما سبق تعلمه في كل جلسة.",
+tools:"بطاقات الحروف، صينية رمل، حروف بارزة، سبورة صغيرة، بطاقات كلمات.",
+pos:"ثبتت أصوات الحروف وأشكالها لدى الطالبة بفضل تعدد الحواس، وتحسن الدمج الصوتي.",
+dif:"احتاجت الجلسة وقتًا طويلًا لتطبيق جميع الخطوات.",
+rec:"الالتزام بالتسلسل والمراجعة التراكمية، وتقسيم الجلسة إلى فترات قصيرة."},
+
+{g:"read",id:"fernald",label:"طريقة فرنالد",name:"طريقة فرنالد (Fernald) للقراءة",
+desc:"طريقة متعددة الحواس (بصرية، سمعية، حركية، لمسية) تتعلم فيها الطالبة الكلمة كاملة بتتبعها بإصبعها مع نطقها، ثم كتابتها من الذاكرة. تبدأ بكلمات تختارها الطالبة بنفسها، مما يزيد دافعيتها.",
+goals:"١- أن تتعرف الطالبة على الكلمة كاملة وتقرأها.\n٢- أن تكتب الطالبة الكلمة من الذاكرة.\n٣- أن تستخدم الطالبة الكلمات المتعلمة في جمل وقصص قصيرة.\n٤- أن تزيد دافعية الطالبة نحو القراءة.",
+steps:"١- تختار الطالبة كلمة تريد تعلمها.\n٢- تكتب المعلمة الكلمة بخط كبير.\n٣- تتتبع الطالبة الكلمة بإصبعها وهي تنطقها مقطعًا مقطعًا، وتكرر حتى تحفظها.\n٤- تكتب الطالبة الكلمة من الذاكرة.\n٥- تُحفظ الكلمة في صندوق كلمات الطالبة.\n٦- تكتب الطالبة جملة أو قصة قصيرة من كلماتها المتعلمة.",
+tools:"بطاقات كبيرة، أقلام عريضة، ورق صنفرة، صندوق كلمات، دفتر قصص.",
+pos:"ارتفعت دافعية الطالبة لأنها تختار كلماتها، وثبتت الكلمات بفضل التتبع.",
+dif:"بطء الطريقة في المراحل الأولى.",
+rec:"الاستمرار في التتبع حتى تستغني عنه الطالبة، وتوظيف الكلمات في قصص الطالبة."},
+
+{g:"read",id:"revive",label:"طريقة إنعاش القراءة",name:"طريقة إنعاش القراءة (Reading Recovery)",
+desc:"برنامج تدخل مبكر فردي ومكثف للطالبات المتأخرات في القراءة، يقوم على جلسات يومية قصيرة تتضمن قراءة نصوص مألوفة، وقراءة نص جديد، والكتابة، والتدريب على المهارات، مع ملاحظة مستمرة لأداء الطالبة.",
+goals:"١- أن تقرأ الطالبة نصوصًا قصيرة بطلاقة ودقة.\n٢- أن توظف الطالبة استراتيجيات القراءة (المعنى، الشكل، الصوت).\n٣- أن تصحح الطالبة أخطاءها أثناء القراءة.\n٤- أن تلحق الطالبة بمستوى زميلاتها.",
+steps:"١- إعادة قراءة نصوص مألوفة لبناء الطلاقة.\n٢- قراءة نص الأمس مع تسجيل ملاحظات المعلمة.\n٣- العمل على الحروف والكلمات (بطاقات، حروف ممغنطة).\n٤- كتابة جملة أو قصة قصيرة.\n٥- قراءة نص جديد بعد تقديم المعلمة له.\n٦- التقويم المستمر والتعزيز.",
+tools:"كتيبات قراءة متدرجة، حروف ممغنطة، بطاقات كلمات، دفتر كتابة، سجل الملاحظات.",
+pos:"تحسنت طلاقة الطالبة، وزادت ثقتها في قراءة النصوص الجديدة.",
+dif:"صعوبة توفير جلسات يومية منتظمة.",
+rec:"الالتزام بجدول يومي ثابت، وتوفير مكتبة نصوص متدرجة، ومتابعة السجلات بانتظام."},
+
+{g:"read",id:"fernaldspell",label:"طريقة فرنالد في الإملاء (الحواس المتعددة)",name:"طريقة فرنالد في الإملاء - أسلوب الحواس المتعددة",
+desc:"تطبيق لطريقة فرنالد في تعليم الإملاء، تتعلم فيه الطالبة كتابة الكلمة باستخدام البصر والسمع واللمس والحركة: تتتبع الكلمة بإصبعها وتنطقها، ثم تكتبها من الذاكرة وتتحقق منها.",
+goals:"١- أن تكتب الطالبة الكلمات المستهدفة إملائيًا بشكل صحيح.\n٢- أن تربط الطالبة شكل الكلمة بصوتها وحركة كتابتها.\n٣- أن تحتفظ الطالبة بكتابة الكلمة لفترة أطول.\n٤- أن تصحح الطالبة أخطاءها الإملائية بنفسها.",
+steps:"١- تكتب المعلمة الكلمة بخط كبير على بطاقة.\n٢- تنطق الطالبة الكلمة وتتتبعها بإصبعها عدة مرات.\n٣- تكتب الطالبة الكلمة في الهواء ثم على الرمل.\n٤- تُحجب الكلمة وتكتبها الطالبة على الورق.\n٥- تقارن الطالبة كتابتها بالبطاقة.\n٦- عند الخطأ تعود إلى التتبع، ثم التعزيز.",
+tools:"بطاقات كلمات بخط كبير، صينية رمل، ورق صنفرة، دفتر إملاء، أقلام عريضة.",
+pos:"تحسنت كتابة الطالبة للكلمات الإملائية، وثبتت الكلمات بفضل التتبع.",
+dif:"استغرقت الخطوات وقتًا مع الكلمات الطويلة.",
+rec:"تقليل عدد الكلمات في الجلسة، وتقسيم الكلمة الطويلة إلى مقاطع ملونة."},
+
+{g:"read",id:"gillingham",label:"طريقة جلنجهام وستلمان",name:"طريقة جلنجهام وستلمان (Gillingham-Stillman)",
+desc:"طريقة صوتية تركيبية منظمة متعددة الحواس، تبدأ بتعليم الحروف وأصواتها بربط ثلاثي (بصري - سمعي - حركي)، ثم دمج الأصوات لتكوين الكلمات، ثم الجمل والقصص. تعتمد على التكرار والتسلسل الدقيق.",
+goals:"١- أن تربط الطالبة شكل الحرف بصوته وحركة كتابته.\n٢- أن تدمج الطالبة الأصوات لقراءة الكلمات.\n٣- أن تكتب الطالبة الكلمات بالتحليل الصوتي.\n٤- أن تقرأ الطالبة جملًا وقصصًا قصيرة.",
+steps:"١- تعرض المعلمة بطاقة الحرف وتنطق اسمه وصوته، وتكرر الطالبة.\n٢- تنطق المعلمة الصوت وتحدد الطالبة الحرف.\n٣- تكتب الطالبة الحرف وهي تنطق صوته.\n٤- تدمج الطالبة الأصوات لقراءة كلمات.\n٥- تكتب الطالبة الكلمات بالتحليل الصوتي.\n٦- قراءة جمل وقصص قصيرة والتعزيز.",
+tools:"بطاقات الحروف، بطاقات الكلمات، سبورة صغيرة، قصص قصيرة، دفتر تدريب.",
+pos:"تحسن الربط بين صوت الحرف وشكله، وأصبحت الطالبة تقرأ كلمات جديدة بالدمج.",
+dif:"الطريقة تحتاج تكرارًا كثيرًا قد يشعر الطالبة بالملل.",
+rec:"تنويع الأنشطة والألعاب داخل الجلسة، والالتزام بالتسلسل دون قفز."},
+
+{g:"read",id:"johnson",label:"أسلوب جونسون ومايكلبست",name:"أسلوب جونسون ومايكلبست (Johnson & Myklebust)",
+desc:"أسلوب علاجي يبدأ بتحديد نقاط القوة والضعف في قنوات التعلم لدى الطالبة، ثم التدريس من خلال القناة الأقوى مع تقوية القناة الأضعف تدريجيًا. يقوم على أن التعلم يبدأ بالفهم والمعنى قبل القراءة والكتابة.",
+goals:"١- أن تُحدَّد قناة التعلم الأقوى لدى الطالبة.\n٢- أن تتعلم الطالبة المهارة من خلال قناتها الأقوى.\n٣- أن تتحسن القناة الأضعف لدى الطالبة تدريجيًا.\n٤- أن تربط الطالبة الكلمة بمعناها قبل قراءتها.",
+steps:"١- تقييم قنوات التعلم لدى الطالبة (سمعية، بصرية، حركية).\n٢- تقديم الكلمة بمعناها من خلال صورة أو موقف حقيقي.\n٣- التدريس من خلال القناة الأقوى.\n٤- إدخال القناة الأضعف تدريجيًا مع الدعم.\n٥- القراءة والكتابة للكلمات ذات المعنى.\n٦- التقويم والتعزيز.",
+tools:"اختبارات تقييم قنوات التعلم، بطاقات صور وكلمات، أشياء حقيقية، تسجيلات صوتية.",
+pos:"ساعد التدريس بالقناة الأقوى على زيادة نجاح الطالبة وثقتها.",
+dif:"يحتاج تقييم قنوات التعلم إلى وقت وأدوات مناسبة.",
+rec:"توثيق نتائج التقييم في الخطة الفردية، والتدرج في إدخال القناة الأضعف."},
+
+{g:"read",id:"completion",label:"أسلوب الإكمال",name:"أسلوب الإكمال",
+desc:"أسلوب تعليمي تُكمل فيه الطالبة الجزء الناقص من الحرف أو الكلمة أو الجملة أو الشكل، لتنمية الإدراك البصري والانتباه للتفاصيل وتثبيت الشكل الصحيح للحروف والكلمات.",
+goals:"١- أن تكمل الطالبة الجزء الناقص من الحرف أو الكلمة.\n٢- أن تنتبه الطالبة لتفاصيل شكل الحرف.\n٣- أن تكتب الطالبة الكلمة كاملة بشكل صحيح.\n٤- أن تقرأ الطالبة الكلمة بعد إكمالها.",
+steps:"١- تعرض المعلمة الكلمة كاملة وتقرأها مع الطالبة.\n٢- تعرض الكلمة نفسها وفيها جزء ناقص (نقطة، حرف، مقطع).\n٣- تحدد الطالبة الجزء الناقص.\n٤- تكمل الطالبة الناقص وتقرأ الكلمة.\n٥- زيادة الأجزاء المحذوفة تدريجيًا حتى تكتب الطالبة الكلمة كاملة.\n٦- التعزيز والتغذية الراجعة.",
+tools:"أوراق عمل بكلمات ناقصة، بطاقات، سبورة صغيرة، أقلام ملونة.",
+pos:"تحسن انتباه الطالبة لتفاصيل الحروف كالنقاط، وقلت أخطاء النقص في كتابتها.",
+dif:"صعوبة تحديد الجزء الناقص عندما يكون في وسط الكلمة.",
+rec:"البدء بحذف جزء واضح، ثم التدرج إلى الأجزاء الأدق، واستخدام اللون للجزء المكمَّل."},
+
+{g:"read",id:"verbalvisual",label:"الطريقة اللفظية البصرية",name:"الطريقة اللفظية البصرية",
+desc:"طريقة تربط بين الكلمة المنطوقة (اللفظ) وصورتها المكتوبة (البصر)، فتسمع الطالبة الكلمة وتنطقها وهي تنظر إليها، ثم تتعرف عليها بصريًا ككل. تفيد في تعليم الكلمات الشائعة والكلمات التي يصعب تحليلها صوتيًا.",
+goals:"١- أن تربط الطالبة الكلمة المنطوقة بصورتها المكتوبة.\n٢- أن تتعرف الطالبة على الكلمة بصريًا بسرعة.\n٣- أن تقرأ الطالبة الكلمات الشائعة بطلاقة.\n٤- أن تستخدم الطالبة الكلمات في جمل.",
+steps:"١- تنطق المعلمة الكلمة وتعرضها مكتوبة مع صورة معبرة.\n٢- تنطق الطالبة الكلمة وهي تنظر إليها.\n٣- تُعرض الكلمة دون صورة وتقرأها الطالبة.\n٤- تبحث الطالبة عن الكلمة بين مجموعة كلمات.\n٥- تقرأ الطالبة الكلمة في جملة.\n٦- العرض السريع للكلمات (البطاقات الومضية) والتعزيز.",
+tools:"بطاقات كلمات مع صور، بطاقات ومضية، لوحة جيوب، عرض تفاعلي.",
+pos:"زادت سرعة الطالبة في التعرف على الكلمات الشائعة، وتحسنت طلاقتها.",
+dif:"الخلط بين الكلمات المتشابهة في الشكل.",
+rec:"عرض الكلمات المتشابهة في جلسات منفصلة، والمراجعة اليومية بالبطاقات الومضية."}
+,
+{g:"active",id:"discussion",label:"استراتيجية المناقشة",name:"استراتيجية المناقشة",
+desc:"استراتيجية حوارية تقوم على طرح المعلمة أسئلة مخططة حول موضوع الدرس، وتبادل الآراء والإجابات بين الطالبات والمعلمة، بما ينمي التفكير والتعبير الشفهي ويثبت المفاهيم.",
+goals:"١- أن تعبر الطالبة عن رأيها وأفكارها شفهيًا.\n٢- أن تجيب الطالبة عن أسئلة حول المهارة المستهدفة.\n٣- أن تستمع الطالبة لزميلاتها وتحترم آراءهن.\n٤- أن تثبت المفاهيم لدى الطالبة من خلال الحوار.",
+steps:"١- التهيئة: إثارة الموضوع بسؤال أو صورة أو موقف.\n٢- المناقشة: طرح أسئلة متدرجة من السهل إلى الصعب، وإتاحة الفرصة لكل طالبة للإجابة.\n٣- توجيه الحوار وتصحيح المفاهيم وربط الإجابات بالهدف.\n٤- إنهاء المناقشة بتلخيص أهم ما توصلت إليه الطالبات.\n٥- التقويم: أسئلة ختامية قصيرة للتحقق من الفهم.",
+tools:"بطاقات أسئلة، صور ومواقف، سبورة، عرض تفاعلي، بطاقات تعزيز.",
+pos:"زادت مشاركة الطالبة وجرأتها في التعبير، وظهر فهمها للمهارة من خلال إجاباتها.",
+dif:"تردد الطالبة في المشاركة في البداية، واحتاجت أسئلة مباشرة وقصيرة.",
+rec:"صياغة أسئلة قصيرة وواضحة، ومنح وقت انتظار كافٍ للإجابة، وتعزيز كل مشاركة."},
+
+{g:"active",id:"cartoon",label:"استراتيجية المفاهيم الكرتونية",name:"استراتيجية المفاهيم الكرتونية",
+desc:"استراتيجية تُعرض فيها المفاهيم على شكل رسوم كرتونية تتحاور فيها شخصيات حول فكرة أو مسألة، وتختار الطالبة الرأي الصحيح وتفسر سبب اختيارها. تثير الاهتمام وتكشف الأخطاء المفاهيمية بطريقة مرحة.",
+goals:"١- أن تتعرف الطالبة على المفهوم من خلال حوار الشخصيات.\n٢- أن تختار الطالبة الرأي الصحيح من بين الآراء المعروضة.\n٣- أن تفسر الطالبة سبب اختيارها بلغتها.\n٤- أن تصحح الطالبة المفاهيم الخاطئة.",
+steps:"١- تجهيز المفاهيم الكرتونية للطالبات.\n٢- عرضها على الطالبة فرديًا أو في مجموعات ثنائية.\n٣- تعلق الطالبة على كل كتابة في الصورة، وتحدد الرأي الذي تتفق معه.\n٤- تفسر الطالبة اختيارها أو تعلق عليه.\n٥- مناقشة الإجابات حتى لو اختلفت الآراء.\n٦- الوصول إلى المفهوم الصحيح والتعزيز.",
+tools:"بطاقات رسوم كرتونية بفقاعات حوار، عرض تفاعلي، أقلام، بطاقات تعزيز.",
+pos:"جذبت الرسوم انتباه الطالبة، وساعدتها على اكتشاف الخطأ وتصحيحه بنفسها.",
+dif:"صعوبة قراءة نصوص الفقاعات الطويلة.",
+rec:"كتابة فقاعات قصيرة بخط كبير، وقراءتها مع الطالبة، واستخدام شخصيات محببة لها."},
+
+{g:["gen","active"],id:"play",label:"استراتيجية التعلم باللعب",name:"استراتيجية التعلم باللعب",
+desc:"استراتيجية توظف الألعاب التعليمية المخططة لتحقيق أهداف الدرس، بحيث تتعلم الطالبة المهارة وتتدرب عليها في جو ممتع يزيد الدافعية ويقلل القلق، وهي مناسبة جدًا لطالبات الصفوف الأولية وذوات صعوبات التعلم.",
+goals:"١- أن تتدرب الطالبة على المهارة المستهدفة من خلال اللعب.\n٢- أن تزيد دافعية الطالبة ومشاركتها.\n٣- أن تلتزم الطالبة بقواعد اللعبة والدور.\n٤- أن تطبق الطالبة المهارة بدقة بعد اللعب.",
+steps:"١- ما قبل اللعب (التخطيط): اختيار لعبة مرتبطة بالهدف وتجهيز أدواتها وشرح قواعدها.\n٢- أثناء اللعب (الاستخدام والتنفيذ): تنفيذ اللعبة مع ملاحظة أداء الطالبة وتوجيهها.\n٣- ما بعد اللعب (المتابعة والتقويم): مناقشة ما تعلمته الطالبة وتقويم إتقانها للمهارة.",
+tools:"ألعاب تعليمية (بطاقات، نرد، لوحات، أحجيات)، صندوق المفاجآت، ألعاب إلكترونية تعليمية، نجوم تعزيز.",
+pos:"تفاعلت الطالبة بحماس، وتكررت ممارسة المهارة دون شعور بالملل.",
+dif:"انشغال الطالبة باللعب أحيانًا عن الهدف التعليمي.",
+rec:"ربط كل لعبة بهدف محدد، وتحديد وقت اللعب، ومناقشة ما تعلمته بعد اللعب."},
+
+{g:"active",id:"standup",label:"استراتيجية قف ارفع يدك شارك",name:"استراتيجية قف ارفع يدك شارك",
+desc:"استراتيجية تعلم نشط تقف فيها الطالبات وترفع كل واحدة يدها، ثم تبحث عن زميلة تشاركها الإجابة أو الفكرة حول سؤال أو مسألة، ثم تعود لمكانها وتعرض ما توصلت إليه. تجمع بين الحركة والمشاركة والتعاون.",
+goals:"١- أن تفكر الطالبة في إجابة السؤال المطروح.\n٢- أن تتبادل الطالبة الأفكار مع زميلتها.\n٣- أن تعرض الطالبة إجابتها بثقة.\n٤- أن يزيد نشاط الطالبة وانتباهها في الحصة.",
+steps:"١- تطرح المعلمة سؤالًا أو مسألة حول المهارة.\n٢- تمنح الطالبات وقتًا للتفكير.\n٣- تقول المعلمة: قفن، ارفعن أيديكن، شاركن.\n٤- تبحث كل طالبة عن زميلة رافعة يدها وتتبادلان الإجابة.\n٥- تعود الطالبات إلى أماكنهن.\n٦- تختار المعلمة طالبات لعرض ما توصلن إليه، والتعزيز.",
+tools:"بطاقات أسئلة، سبورة، مؤقت زمني، بطاقات تعزيز.",
+pos:"الحركة جددت نشاط الطالبة، وزادت مشاركتها وثقتها في عرض إجابتها.",
+dif:"صعوبة ضبط الحركة والوقت مع عدد الطالبات.",
+rec:"تحديد قواعد واضحة للحركة، واستخدام مؤقت، وتطبيقها في مجموعات صغيرة أو ثنائيات."},
+
+{g:"active",id:"coach",label:"استراتيجية المدرب",name:"استراتيجية المدرب (الزميلة المدربة)",
+desc:"استراتيجية تعاونية تعمل فيها الطالبات في ثنائيات، تحل إحداهما المسألة أو تؤدي المهارة بصوت مسموع، والأخرى تؤدي دور المدربة التي تتابع وتصحح وتشجع، ثم يتبادلان الأدوار.",
+goals:"١- أن تؤدي الطالبة المهارة بصوت مسموع.\n٢- أن تتابع الطالبة أداء زميلتها وتصححه.\n٣- أن تتعاون الطالبة مع زميلتها في التعلم.\n٤- أن يثبت تعلم الطالبة من خلال تعليمها لغيرها.",
+steps:"١- تقسيم الطالبات إلى ثنائيات متجاورة.\n٢- تحل الطالبة الأولى المسألة بصوت مسموع، والثانية تؤدي دور المدربة.\n٣- تطرح المعلمة سؤالًا، وتجيب الطالبة الأولى، والثانية تصحح أو تشيد بالإجابة.\n٤- تتبادل الطالبتان الأدوار مع سؤال جديد.\n٥- تتابع المعلمة وتشجع، وتعيد العملية تبعًا للوقت المتاح.",
+tools:"بطاقات أسئلة، بطاقات «المدربة» و«المتعلمة»، سبورات صغيرة، بطاقات تعزيز.",
+pos:"زادت ثقة الطالبة، واستفادت من شرح زميلتها وتصحيحها.",
+dif:"حاجة الطالبة إلى نموذج واضح لدور المدربة.",
+rec:"نمذجة الأدوار أمام الطالبات قبل التطبيق، واختيار ثنائيات متقاربة أو داعمة."},
+
+{g:"active",id:"alternate",label:"استراتيجية التعاقب",name:"استراتيجية التعاقب",
+desc:"استراتيجية تعاونية تعمل فيها الطالبات في مجموعات ثنائية، تحل فيها الطالبة الأولى المسألة بينما تستمع الثانية وتساعدها، ثم تتبادلان الأدوار في المسألة التالية، وتتكرر الخطوات مع مسائل متعددة.",
+goals:"١- أن تحل الطالبة المسألة أو تؤدي المهارة بالتناوب مع زميلتها.\n٢- أن تستمع الطالبة لزميلتها وتساعدها.\n٣- أن تتدرب الطالبة على المهارة بشكل متكرر.\n٤- أن تنمو مهارات التعاون لدى الطالبة.",
+steps:"١- تكوين مجموعات ثنائية.\n٢- تحل الطالبة الأولى المسألة الأولى بينما تستمع الثانية وتساعدها.\n٣- تحل الطالبة الثانية المسألة الثانية بينما تستمع الأولى وتساعدها.\n٤- تكرار الخطوات مع مسائل متعددة.\n٥- تتابع المعلمة وتقدم التغذية الراجعة والتعزيز.",
+tools:"أوراق عمل بمسائل متعددة، سبورات صغيرة، بطاقات أسئلة.",
+pos:"زاد التدريب على المهارة، وتعلمت الطالبة من ملاحظة زميلتها.",
+dif:"اعتماد إحدى الطالبتين على الأخرى أحيانًا.",
+rec:"توضيح دور كل طالبة، ومتابعة التبادل الفعلي للأدوار."},
+
+{g:"active",id:"showcards",label:"استراتيجية المواجهة (اكشف أوراقك)",name:"استراتيجية المواجهة (اكشف أوراقك)",
+desc:"استراتيجية تعاونية تُعد فيها بطاقات تحتوي أسئلة وإجاباتها حول الدرس، توضع مقلوبة على الطاولة، وتسحب الطالبة بطاقة وتجيب عن سؤالها، ثم تكشف الإجابة وتتأكد من صحتها مع زميلاتها.",
+goals:"١- أن تجيب الطالبة عن أسئلة حول المهارة المستهدفة.\n٢- أن تتحقق الطالبة من صحة إجابتها ذاتيًا.\n٣- أن تراجع الطالبة المهارة بطريقة ممتعة.\n٤- أن تتعاون الطالبة مع زميلاتها في التصحيح.",
+steps:"١- تصمم المعلمة بطاقات تحتوي أسئلة وإجاباتها حول الدرس.\n٢- توضع البطاقات مقلوبة في منتصف الطاولة.\n٣- تختار الطالبة بطاقة الأسئلة.\n٤- تقوم بالحل لوحدها.\n٥- بعد الانتهاء تكشف إجابتها وتتحقق منها.\n٦- عند الخطأ تعيد الحل بمساعدة زميلتها، وتتكرر الخطوات.",
+tools:"بطاقات أسئلة وإجابات، صندوق بطاقات، مؤقت، بطاقات تعزيز.",
+pos:"أثار عنصر المفاجأة حماس الطالبة، وتدربت على التحقق الذاتي من إجابتها.",
+dif:"صعوبة بعض الأسئلة دون دعم.",
+rec:"تدرج صعوبة البطاقات، وإضافة تلميح مصور على البطاقة."},
+
+{g:"active",id:"fancard",label:"استراتيجية البطاقة المروحية",name:"استراتيجية البطاقة المروحية",
+desc:"استراتيجية تعاونية تُعد فيها بطاقات أسئلة عن الدرس الحالي والسابق، وتمسكها الطالبة على شكل مروحة، فتختار زميلتها بطاقة، ويجيب طرف ويقيم الطرف الآخر الإجابة، ثم تتبادل الأدوار.",
+goals:"١- أن تراجع الطالبة المهارات السابقة والحالية.\n٢- أن تجيب الطالبة عن الأسئلة بدقة.\n٣- أن تقيم الطالبة إجابة زميلتها.\n٤- أن تتعاون الطالبة مع زميلاتها في التعلم.",
+steps:"١- تصمم المعلمة بطاقات أسئلة عن الدروس السابقة أو الحالية.\n٢- تعطى الطالبة البطاقات لتضعها في يدها على شكل مروحة.\n٣- تقوم الطالبة الثانية بالاختيار من البطاقات.\n٤- تحل البطاقة.\n٥- تقيم الطالبة الأولى الإجابة بمساعدة المعلمة.\n٦- تتبادل الطالبتان الأدوار وتتكرر الخطوات مع البطاقات الأخرى.",
+tools:"بطاقات أسئلة ملونة، سبورات صغيرة، بطاقات تعزيز.",
+pos:"راجعت الطالبة المهارات بطريقة ممتعة، وزاد تفاعلها مع زميلتها.",
+dif:"صعوبة تقييم إجابة الزميلة دون مساعدة.",
+rec:"إرفاق الإجابة الصحيحة على ظهر البطاقة، ومتابعة المعلمة للتقييم."},
+
+{g:"active",id:"infogap",label:"استراتيجية فجوة المعلومات",name:"استراتيجية فجوة المعلومات",
+desc:"استراتيجية تعاونية تقسم فيها المهمة إلى أجزاء، تمتلك كل طالبة جزءًا منها، فلا تكتمل إلا بتبادل المعلومات بين الطالبات. تنمي التواصل والتعاون والتفكير.",
+goals:"١- أن تنجز الطالبة جزءًا من المهمة بدقة.\n٢- أن تتبادل الطالبة المعلومات مع زميلتها لإكمال المهمة.\n٣- أن تعرض الطالبة النتيجة شفهيًا أو كتابيًا.\n٤- أن تنمو مهارات التواصل والتعاون لدى الطالبة.",
+steps:"١- تكوين مجموعة من طالبتين.\n٢- تقدم المعلمة نشاطًا يتطلب خطوتين لحله مثلًا.\n٣- تبدأ الطالبة الأولى الخطوة الأولى، ثم تكمل الثانية الخطوة الثانية.\n٤- بعد إنجاز النشاط تتشاركان في نقاش النتيجة، وكل منهما تدرب الأخرى.\n٥- تعرض النتائج شفهيًا أو كتابيًا، والتعزيز.",
+tools:"بطاقات مهام مقسمة، أوراق عمل، سبورات صغيرة.",
+pos:"شعرت الطالبة بأهمية دورها، وزاد تواصلها مع زميلتها.",
+dif:"تأخر إحدى الطالبتين يؤخر إنجاز المهمة.",
+rec:"اختيار مهام قصيرة واضحة الخطوات، وتوزيع الأدوار حسب قدرة كل طالبة."},
+
+{g:["active","math"],id:"thinkaloud",label:"تفكير الأقران بصوت مسموع في حل المشكلات",name:"استراتيجية تفكير الأقران بصوت مسموع في حل المشكلات",
+desc:"استراتيجية تعمل فيها الطالبات في ثنائيات، تحل إحداهما المسألة وتشرح خطوات تفكيرها بصوت مسموع، والأخرى تستمع وتناقشها في طريقة الحل، ثم تتبادلان الأدوار في مسائل أخرى.",
+goals:"١- أن تشرح الطالبة خطوات حلها بصوت مسموع.\n٢- أن تستمع الطالبة لطريقة تفكير زميلتها وتناقشها.\n٣- أن تكتشف الطالبة أخطاءها أثناء الشرح.\n٤- أن تنمو مهارة حل المشكلات لدى الطالبة.",
+steps:"١- تصلح للمجموعة من طالبتين.\n٢- إحداهما تؤدي حل المسألة وتشرحها بصوت مرتفع مع الكتابة.\n٣- الأخرى تستمع وتحاول مناقشة زميلتها لكيفية الحل وتفهيمها.\n٤- تتبادلان الأدوار في مسائل أخرى.\n٥- تتابع المعلمة وتقدم التغذية الراجعة والتعزيز.",
+tools:"بطاقات مسائل، سبورات صغيرة، أوراق عمل.",
+pos:"ساعد التفكير بصوت مسموع على كشف خطوات الحل وأخطائها.",
+dif:"صعوبة التعبير عن خطوات التفكير لفظيًا في البداية.",
+rec:"نمذجة التفكير بصوت مسموع من المعلمة أولًا، وتوفير بطاقة خطوات مساعدة."},
+
+{g:"active",id:"cardq",label:"استراتيجية أسئلة البطاقات",name:"استراتيجية أسئلة البطاقات",
+desc:"استراتيجية تعاونية تعد فيها المعلمة بطاقات تتألف كل منها من سؤالين أو إجابتين، وتوزعها على الطالبات في ثنائيات، تسأل الأولى زميلتها والثانية تجيب، ثم تتبادلان، وإذا لم تجب الطالبة تقدم لها زميلتها الإجابة.",
+goals:"١- أن تجيب الطالبة عن أسئلة حول المهارة.\n٢- أن تطرح الطالبة الأسئلة على زميلتها.\n٣- أن تساعد الطالبة زميلتها في الوصول للإجابة.\n٤- أن تراجع الطالبة المهارة بشكل تعاوني.",
+steps:"١- تعد المعلمة البطاقات، كل بطاقة تتألف من سؤالين أو إجابتين.\n٢- توزع البطاقات على الطالبات.\n٣- كل طالبة مع الأخرى.\n٤- تسأل الطالبة الأولى زميلتها سؤالين، والثانية تسأل أيضًا.\n٥- إذا لم تجب الطالبة تقدم لها زميلتها الإجابة، والتعزيز.",
+tools:"بطاقات أسئلة وإجابات، بطاقات تعزيز.",
+pos:"تدربت الطالبة على السؤال والإجابة، واستفادت من مساعدة زميلتها.",
+dif:"صعوبة قراءة الأسئلة على بعض الطالبات.",
+rec:"كتابة الأسئلة بخط واضح مع صور، أو قراءتها بصوت المعلمة مسجلًا."},
+
+{g:"active",id:"listenread",label:"استراتيجية استمع - اقرأ - ناقش",name:"استراتيجية استمع - اقرأ - ناقش",
+desc:"استراتيجية تمر فيها الطالبة بثلاث مراحل: تستمع لعرض المعلمة لموضوع أو نص، ثم تقرأ النص بنفسها، ثم تناقشه مع المعلمة وزميلاتها. تدمج مهارات الاستماع والقراءة والتحدث في تعلم واحد.",
+goals:"١- أن تستمع الطالبة باهتمام لعرض المعلمة.\n٢- أن تقرأ الطالبة النص قراءة صحيحة.\n٣- أن تناقش الطالبة أفكار النص وتجيب عن أسئلته.\n٤- أن يتحسن فهم الطالبة للمقروء.",
+steps:"١- تستمع الطالبة إلى موضوع من المعلمة.\n٢- تقرأ الطالبة النص.\n٣- تناقش الطالبة حول النص مع المعلمة وزميلاتها.\n٤- التقويم بأسئلة قصيرة حول النص، والتعزيز.",
+tools:"نصوص قصيرة مصورة، تسجيلات صوتية، بطاقات أسئلة، عرض تفاعلي.",
+pos:"ساعد الاستماع قبل القراءة على تسهيل قراءة الطالبة وفهمها للنص.",
+dif:"صعوبة قراءة النص كاملًا بعد الاستماع مباشرة.",
+rec:"اختيار نصوص قصيرة مناسبة لمستوى الطالبة، وتقسيمها إلى فقرات."},
+
+{g:"active",id:"activereader",label:"استراتيجية القارئ النشط",name:"استراتيجية القارئ النشط",
+desc:"استراتيجية تشجع الطالبة على التفاعل مع النص أثناء القراءة: التفكير بصوت مسموع، وطرح الأسئلة، وتوظيف استراتيجيات القراءة، ومناقشة الأفكار الجديدة، بدلًا من القراءة السلبية.",
+goals:"١- أن تقرأ الطالبة النص وهي تفكر في معناه.\n٢- أن توظف الطالبة استراتيجيات القراءة الصحيحة.\n٣- أن تطرح الطالبة أسئلة حول المقروء.\n٤- أن تناقش الطالبة الأفكار الجديدة مع زميلاتها.",
+steps:"١- توضح المعلمة الاستراتيجية المراد توضيحها للطالبة.\n٢- تقرأ المعلمة جزءًا من محتوى الدرس وتفكر بصوت مسموع تجاه كل استراتيجية.\n٣- تستخدم الطالبة الاستراتيجية الأخرى مثل الأقران.\n٤- تستخدم الطالبة نموذج القراءة الخاص بها بالتمرين.\n٥- تشجيع الطالبة على مناقشة الأفكار الجديدة والنقد والمشاركة بين الأقران.",
+tools:"نصوص قصيرة، بطاقات استراتيجيات القراءة، أقلام تظليل، بطاقات أسئلة.",
+pos:"أصبحت الطالبة أكثر تفاعلًا مع النص وتطرح أسئلة حوله.",
+dif:"صعوبة الجمع بين القراءة والتفكير في آن واحد.",
+rec:"نمذجة التفكير بصوت مسموع باستمرار، والبدء بنصوص قصيرة جدًا."},
+
+{g:"active",id:"magnet",label:"استراتيجية ملخصات المغناطيس",name:"استراتيجية ملخصات المغناطيس",
+desc:"استراتيجية للفهم القرائي تبحث فيها الطالبة عن الكلمات المغناطيسية (الكلمات الرئيسة التي تجذب إليها معنى النص)، ثم تستخدمها لكتابة أو قول ملخص قصير للنص.",
+goals:"١- أن تحدد الطالبة الكلمات الرئيسة في النص.\n٢- أن تربط الطالبة الكلمات المغناطيسية بموضوع النص.\n٣- أن تلخص الطالبة النص بجملة أو جملتين.\n٤- أن يتحسن فهم الطالبة للمقروء.",
+steps:"١- توضح المعلمة الاستراتيجية المراد توضيحها للطالبة.\n٢- تقوم الطالبة بقراءة نص.\n٣- تبحث عن الكلمات المغناطيسية التي لها علاقة بالموضوع.\n٤- تناقش المعلمة معها الكلمات المغناطيسية بعد انتهائها من القراءة.\n٥- تكوّن الطالبة ملخصًا قصيرًا من الكلمات المغناطيسية، والتعزيز.",
+tools:"نصوص قصيرة، بطاقات على شكل مغناطيس، أقلام تظليل، سبورة مغناطيسية.",
+pos:"ساعدت الكلمات المغناطيسية الطالبة على التقاط الفكرة الرئيسة للنص.",
+dif:"صعوبة التمييز بين الكلمات الرئيسة والفرعية.",
+rec:"البدء بنص قصير جدًا، وتحديد عدد الكلمات المطلوبة (٣ كلمات مثلًا)."}
+,
+{g:"active",id:"oneminute",label:"استراتيجية الدقيقة الواحدة",name:"استراتيجية الدقيقة الواحدة",
+desc:"استراتيجية تقويم ختامية سريعة، تُخصص فيها دقيقة واحدة في نهاية الحصة لتجيب الطالبة عن سؤال أو سؤالين قصيرين، مثل: ماذا تعلمت اليوم؟ وما الشيء الذي لم يتضح لي؟ تكشف للمعلمة مدى فهم الطالبة وما تحتاج إلى إعادته.",
+goals:"١- أن تسترجع الطالبة أهم ما تعلمته في الحصة.\n٢- أن تعبر الطالبة عما لم يتضح لها.\n٣- أن تحدد المعلمة مدى تحقق هدف الدرس.\n٤- أن تبني المعلمة الحصة التالية على نتائج التقويم.",
+steps:"١- تعلن المعلمة قبل نهاية الحصة بدقائق عن نشاط الدقيقة الواحدة.\n٢- توزع بطاقة الدقيقة الواحدة على الطالبة.\n٣- تطرح سؤالًا أو سؤالين قصيرين حول الدرس (ماذا تعلمتِ؟ ما الذي لم يتضح لكِ؟).\n٤- تشغل المعلمة مؤقتًا لمدة دقيقة واحدة، وتجيب الطالبة كتابة أو رسمًا أو شفهيًا.\n٥- تجمع المعلمة البطاقات وتطلع عليها.\n٦- تعالج المعلمة النقاط غير الواضحة في بداية الحصة التالية.",
+tools:"بطاقات الدقيقة الواحدة، مؤقت زمني (ساعة رملية أو مؤقت إلكتروني)، أقلام، صندوق جمع البطاقات.",
+pos:"أعطت المعلمة صورة سريعة عن فهم الطالبة، وساعدت الطالبة على تلخيص ما تعلمته.",
+dif:"صعوبة الكتابة خلال دقيقة واحدة لدى الطالبة.",
+rec:"السماح بالإجابة رسمًا أو شفهيًا أو بالاختيار من صور، وتثبيت الأسئلة نفسها كل حصة لتعتادها الطالبة."}
+,
+{g:["math","read"],id:"problemsolving",label:"استراتيجية حل المشكلات",name:"استراتيجية حل المشكلات",
+desc:"استراتيجية تفكير منظمة تواجه فيها الطالبة موقفًا أو مسألة، فتفهمها وتحدد المطلوب، ثم تختار خطة للحل وتنفذها وتتحقق من صحة الحل. تُطبق في الرياضيات (المسائل اللفظية) وفي القراءة والإملاء (فهم المقروء وتصحيح الأخطاء)، وتنمي التفكير والاستقلالية لدى ذوات صعوبات التعلم.",
+goals:"١- أن تفهم الطالبة المشكلة وتحدد المعطيات والمطلوب.\n٢- أن تختار الطالبة خطة مناسبة للحل.\n٣- أن تنفذ الطالبة الحل خطوة خطوة.\n٤- أن تتحقق الطالبة من صحة الحل وتعبر عنه بلغتها.",
+steps:"١- عرض المشكلة: تعرض المعلمة المسألة أو الموقف بالصور والكلمات، وتقرؤها مع الطالبة.\n٢- فهم المشكلة: تحدد الطالبة ماذا تعرف (المعطيات) وماذا تريد (المطلوب)، ويمكن تلوينهما.\n٣- التخطيط: تختار الطالبة طريقة الحل (الرسم، المحسوسات، العد، تحليل الكلمة، القاعدة).\n٤- التنفيذ: تحل الطالبة بالخطوات مع التفكير بصوت مسموع.\n٥- التحقق: تراجع الطالبة الحل وتتأكد من مناسبته للسؤال.\n٦- التعميم: تحل الطالبة مشكلة مشابهة، والتعزيز.",
+tools:"بطاقات مسائل مصورة، محسوسات (مكعبات، عدادات)، بطاقة خطوات الحل المصورة، أقلام تظليل، سبورة صغيرة.",
+pos:"أصبحت الطالبة تقرأ المشكلة بتأنٍ وتحدد المطلوب قبل الحل، وقلت إجاباتها العشوائية.",
+dif:"صعوبة فهم صياغة المسائل اللفظية وتحديد المعطيات.",
+rec:"تبسيط لغة المسألة ودعمها بالصور، وتعليق بطاقة خطوات الحل أمام الطالبة، والبدء بمسائل من خطوة واحدة."},
+
+{g:"gen",id:"venn",label:"استراتيجية مخطط فن",name:"استراتيجية مخطط فن",
+desc:"منظم بصري من دائرتين متداخلتين أو أكثر، تكتب فيه الطالبة أوجه الاختلاف بين مفهومين في الجزأين المنفصلين، وأوجه الشبه في المنطقة المشتركة. ينمي مهارات المقارنة والتصنيف والتفكير البصري.",
+goals:"١- أن تحدد الطالبة أوجه الشبه بين مفهومين.\n٢- أن تحدد الطالبة أوجه الاختلاف بين مفهومين.\n٣- أن تصنف الطالبة المفردات في المكان الصحيح من المخطط.\n٤- أن تعبر الطالبة عن نتيجة المقارنة بجملة.",
+steps:"١- تحدد المعلمة المفهومين المراد المقارنة بينهما (حرفان متشابهان، نوعا التنوين، عددان، شكلان).\n٢- ترسم المخطط وتكتب اسم كل مفهوم فوق دائرته.\n٣- تنمذج المعلمة وضع مثال واحد في كل منطقة.\n٤- تضع الطالبة البطاقات أو تكتب الخصائص في المكان المناسب.\n٥- مناقشة أوجه الشبه والاختلاف وتصحيح الأخطاء.\n٦- تلخص الطالبة المقارنة بجملة، والتعزيز.",
+tools:"مخطط فن مرسوم أو مطوق (أطواق ملونة على الأرض)، بطاقات صور وكلمات، سبورة مغناطيسية، أقلام ملونة.",
+pos:"وضح المخطط الفروق بصريًا، وساعد الطالبة على التمييز بين المتشابهات.",
+dif:"صعوبة فهم معنى المنطقة المشتركة في البداية.",
+rec:"البدء بأطواق حقيقية على الأرض وأشياء محسوسة، ثم الانتقال إلى المخطط الورقي."},
+
+{g:"gen",id:"frayer",label:"نموذج فراير",name:"استراتيجية نموذج فراير",
+desc:"منظم بصري لتعلم المفاهيم والمفردات، يقسم إلى أربعة أجزاء حول المفهوم في المركز: التعريف، والخصائص، والأمثلة، واللاأمثلة. يساعد الطالبة على بناء فهم عميق للمفهوم وتمييزه عن غيره.",
+goals:"١- أن تعرف الطالبة المفهوم بلغتها البسيطة.\n٢- أن تحدد الطالبة خصائص المفهوم.\n٣- أن تعطي الطالبة أمثلة صحيحة على المفهوم.\n٤- أن تميز الطالبة بين الأمثلة واللاأمثلة.",
+steps:"١- تكتب المعلمة المفهوم في مركز النموذج (مثل: التنوين، العدد الزوجي، الحرف الشمسي).\n٢- تشرح المفهوم وتكتب تعريفًا مبسطًا مع الطالبة.\n٣- تحدد الطالبة بمساعدة المعلمة خصائص المفهوم.\n٤- تختار الطالبة أمثلة على المفهوم (بطاقات أو صور).\n٥- تحدد الطالبة لا أمثلة (ما ليس من المفهوم) وتبرر.\n٦- مراجعة النموذج كاملًا والتعزيز.",
+tools:"ورقة نموذج فراير مقسمة إلى أربعة أجزاء، بطاقات صور وكلمات، أقلام ملونة، عرض تفاعلي.",
+pos:"تكوّن لدى الطالبة فهم واضح للمفهوم، وأصبحت تميز الأمثلة الصحيحة من غيرها.",
+dif:"صعوبة صياغة التعريف والخصائص بلغة الطالبة.",
+rec:"استخدام صور بدل الكتابة في الأجزاء، وتقديم بدائل جاهزة تختار منها الطالبة."},
+
+{g:"gen",id:"exitcard",label:"استراتيجية بطاقة الخروج",name:"استراتيجية بطاقة الخروج",
+desc:"استراتيجية تقويم ختامية تجيب فيها الطالبة قبل خروجها من الحصة عن سؤال أو مهمة قصيرة على بطاقة صغيرة، لتتعرف المعلمة على مدى تحقق هدف الدرس وتخطط للحصة التالية.",
+goals:"١- أن تطبق الطالبة المهارة المستهدفة في مهمة قصيرة.\n٢- أن تسترجع الطالبة ما تعلمته في الحصة.\n٣- أن تحدد المعلمة مستوى إتقان الطالبة للهدف.\n٤- أن تخطط المعلمة للدعم المطلوب في الحصة التالية.",
+steps:"١- تعد المعلمة بطاقة خروج فيها سؤال أو مهمة واحدة مرتبطة بهدف الدرس.\n٢- توزع البطاقة على الطالبة قبل نهاية الحصة بدقائق.\n٣- تجيب الطالبة على البطاقة كتابة أو رسمًا أو بالاختيار.\n٤- تسلم الطالبة البطاقة عند الخروج (في صندوق أو لوحة الخروج).\n٥- تصنف المعلمة البطاقات: أتقنت، تحتاج دعمًا، لم تتقن.\n٦- تبني المعلمة بداية الحصة التالية على النتائج.",
+tools:"بطاقات خروج مطبوعة، صندوق أو لوحة الخروج، أقلام، ملصقات تعزيز.",
+pos:"أعطت المعلمة دليلًا سريعًا على تحقق الهدف، وأحبت الطالبة تسليم بطاقتها عند الخروج.",
+dif:"احتاجت الطالبة إلى قراءة السؤال لها.",
+rec:"صياغة سؤال واحد قصير مدعوم بصورة، والتنويع بين الكتابة والاختيار والرسم."},
+
+{g:"gen",id:"roleplay",label:"استراتيجية لعب الأدوار",name:"استراتيجية لعب الأدوار",
+desc:"استراتيجية تمثل فيها الطالبة دورًا أو شخصية في موقف تعليمي قريب من الواقع (بائعة، معلمة، شخصية قصة)، فتطبق المهارة أثناء التمثيل. تربط التعلم بالحياة، وتنمي التعبير والثقة بالنفس.",
+goals:"١- أن تطبق الطالبة المهارة المستهدفة في موقف حياتي.\n٢- أن تعبر الطالبة شفهيًا بثقة أثناء أداء الدور.\n٣- أن تتعاون الطالبة مع زميلاتها في أداء الموقف.\n٤- أن تستنتج الطالبة ما تعلمته من الموقف.",
+steps:"١- تحدد المعلمة الموقف والأدوار المرتبطة بهدف الدرس (مثل: موقف شراء للعد والنقود، أو تمثيل قصة للقراءة).\n٢- تشرح الموقف والأدوار وتجهز الأدوات.\n٣- توزع الأدوار على الطالبات وتنمذج دورًا واحدًا.\n٤- تؤدي الطالبات الأدوار مع متابعة المعلمة وتوجيهها.\n٥- مناقشة ما حدث في الموقف والمهارة التي طُبقت.\n٦- التقويم والتعزيز، ويمكن تبادل الأدوار.",
+tools:"أزياء وإكسسوارات بسيطة، مجسمات (نقود، سلع، دمى)، بطاقات الأدوار، مسرح عرائس.",
+pos:"استمتعت الطالبة وطبقت المهارة في موقف حقيقي، وزادت جرأتها في التعبير.",
+dif:"خجل الطالبة في البداية، وانشغالها بالتمثيل عن الهدف.",
+rec:"البدء بأدوار قصيرة مع المعلمة، واستخدام الدمى للطالبات الخجولات، وربط الموقف بهدف واضح."}
+
+];
+const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
+
+(function(){
+  const KEY="strategy-forms-general-v1";
+  const $=id=>document.getElementById(id);
+  const fields=[...document.querySelectorAll(".f[id]")];
+  const say=t=>{$("status").textContent=t;};
+  const sel=$("stratSel");
+
+  $("noJs").remove();sel.innerHTML="";
+  [["gen","استراتيجيات عامة"],["read","القراءة والكتابة والإملاء"],["active","التعلم النشط والتعاوني"],["math","الرياضيات"]].forEach(([g,t])=>{
+    const og=document.createElement("optgroup");og.label=t;
+    STRATEGIES.filter(s=>[].concat(s.g).includes(g)).forEach(s=>{const o=document.createElement("option");o.value=s.id;o.textContent=s.label;og.append(o);});
+    if(og.children.length)sel.append(og);
+  });
+
+  function fillStrategy(id){
+    const s=STRATEGIES.find(x=>x.id===id)||STRATEGIES[0];
+    STRAT_FIELDS.forEach(k=>{$("f_"+k).innerText=s[k]||"";});
+  }
+
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}}
+  function save(){
+    const d={strat:sel.value,f:{}};
+    fields.forEach(el=>d.f[el.id]=el.innerText);
+    try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}
+  }
+
+  const saved=load();
+  if(saved.strat&&STRATEGIES.some(s=>s.id===saved.strat))sel.value=saved.strat;
+  fillStrategy(sel.value);
+  if(saved.f){fields.forEach(el=>{if(saved.f[el.id]!=null)el.innerText=saved.f[el.id]})}
+
+  sel.addEventListener("change",()=>{fillStrategy(sel.value);save();say("تمت تعبئة بيانات: "+sel.options[sel.selectedIndex].text);});
+
+  fields.forEach(el=>{
+    el.addEventListener("input",()=>{if(el.innerText.trim()==="")el.innerHTML="";save();});
+    el.addEventListener("paste",e=>{e.preventDefault();const t=(e.clipboardData||window.clipboardData).getData("text");document.execCommand("insertText",false,t);});
+  });
+
+  function shrink(file,max){
+    return new Promise((res,rej)=>{
+      const r=new FileReader();
+      r.onload=()=>{const img=new Image();img.onload=()=>{
+        const s=Math.min(1,max/Math.max(img.width,img.height));
+        const c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);
+        const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);
+        res(c.toDataURL(file.type==="image/png"?"image/png":"image/jpeg",0.88));
+      };img.onerror=rej;img.src=r.result;};
+      r.onerror=rej;r.readAsDataURL(file);
+    });
+  }
+  $("evIn").addEventListener("change",async e=>{
+    for(const f of [...e.target.files]){
+      try{
+        const src=await shrink(f,1400);
+        const box=document.createElement("div");box.className="shot";
+        const img=document.createElement("img");img.src=src;img.alt="شاهد";
+        const rm=document.createElement("button");rm.type="button";rm.className="no-pdf";rm.textContent="حذف";
+        rm.onclick=()=>box.remove();
+        box.append(img,rm);$("shots").append(box);
+      }catch(err){say("تعذّر فتح إحدى الصور. جرّبي صورة PNG أو JPG.");}
+    }
+    e.target.value="";
+  });
+
+  $("clearBtn").onclick=()=>{$("confirmBox").hidden=false;};
+  $("noClear").onclick=()=>{$("confirmBox").hidden=true;};
+  $("imgClose").onclick=()=>{$("imgOut").hidden=true;};
+  $("yesClear").onclick=()=>{
+    ["f_student","f_grade","f_skill","f_day","f_date"].forEach(id=>$(id).innerHTML="");
+    fillStrategy(sel.value);
+    $("shots").innerHTML="";$("confirmBox").hidden=true;save();say("تم مسح بيانات الطالبة والصور، وأُعيدت بيانات الاستراتيجية الأصلية.");
+  };
+
+  let dl=null;
+  if(window.claude&&window.claude.use){window.claude.use("downloads").then(n=>{dl=n;}).catch(()=>{});}
+
+  async function captureSheet(sheet){
+    const inFrame=window.top!==window.self;
+    const isSafari=/^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent)||/iP(hone|ad|od)/.test(navigator.userAgent);
+    const prev={w:sheet.style.width,sh:sheet.style.boxShadow,mw:sheet.style.maxWidth};
+    document.body.classList.add("cap");
+    sheet.style.width="794px";sheet.style.maxWidth="none";sheet.style.boxShadow="none";
+    try{
+      await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+      const w=sheet.offsetWidth,h=sheet.offsetHeight;
+      const pr=Math.max(1,Math.min(2,Math.sqrt(16000000/(w*h))));
+      if(window.htmlToImage){
+        try{
+          const opts={pixelRatio:pr,backgroundColor:"#ffffff",width:w,height:h,skipFonts:inFrame,cacheBust:false,
+            filter:n=>!(n.classList&&n.classList.contains("no-pdf"))};
+          let c=await window.htmlToImage.toCanvas(sheet,opts);
+          if(isSafari){c=await window.htmlToImage.toCanvas(sheet,opts);}
+          c.getContext("2d").getImageData(0,0,1,1);
+          if(c.width>10&&c.height>10)return c;
+        }catch(e){console.warn("native capture failed",e);}
+      }
+      return await window.html2canvas(sheet,{scale:pr,backgroundColor:"#ffffff",useCORS:true,windowWidth:900,
+        onclone:doc=>{doc.body.classList.add("cap");const s=doc.getElementById("sheet");s.style.width="794px";s.style.boxShadow="none";}});
+    }finally{
+      document.body.classList.remove("cap");
+      sheet.style.width=prev.w;sheet.style.maxWidth=prev.mw;sheet.style.boxShadow=prev.sh;
+    }
+  }
+
+  $("pdfBtn").onclick=async()=>{
+    if(!(window.htmlToImage||window.html2canvas)||!window.jspdf){say("أدوات التصدير لم تُحمَّل بعد، انتظري ثوانٍ وأعيدي المحاولة.");return;}
+    const btn=$("pdfBtn");btn.disabled=true;say("جارٍ تجهيز ملف PDF…");
+    try{
+      if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+      const canvas=await captureSheet($("sheet"));
+      const {jsPDF}=window.jspdf;
+      const pdf=new jsPDF({unit:"mm",format:"a4",orientation:"portrait"});
+      const pw=210,ph=297,m=6;
+      const iw=pw-2*m, pxPerMm=canvas.width/iw, pageHpx=Math.floor((ph-2*m)*pxPerMm);
+      let y=0,first=true;
+      while(y<canvas.height){
+        const h=Math.min(pageHpx,canvas.height-y);
+        const part=document.createElement("canvas");part.width=canvas.width;part.height=h;
+        const ctx=part.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,part.width,h);
+        ctx.drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+        if(!first)pdf.addPage();first=false;
+        pdf.addImage(part.toDataURL("image/jpeg",0.92),"JPEG",m,m,iw,h/pxPerMm);
+        y+=h;
+      }
+      const blob=pdf.output("blob");
+      const who=($("f_student").innerText||"").trim();
+      const strat=STRATEGIES.find(x=>x.id===sel.value);
+      const name="استمارة "+(strat?strat.label.split(" (")[0]:"استراتيجية")+(who?" - "+who:"")+".pdf";
+      const showImg=()=>{$("imgOutImg").src=canvas.toDataURL("image/jpeg",0.92);$("imgOut").hidden=false;$("imgOut").scrollIntoView({behavior:"smooth",block:"start"});say("");};
+      if(!dl){
+        if(window.top===window.self){
+          const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+          say("تم تنزيل ملف PDF.");return;
+        }
+        showImg();return;
+      }
+      try{await dl.save({filename:name,data:blob});say("تم حفظ ملف PDF.");}
+      catch(err){
+        if(err&&err.code==="declined")say("أُلغي الحفظ.");
+        else if(err&&err.code==="rate_limited")say("هناك نافذة حفظ مفتوحة بالفعل، أكمليها أولاً.");
+        else showImg();
+      }
+    }catch(err){say("حدث خطأ أثناء تجهيز الملف. أعيدي المحاولة.");}
+    finally{btn.disabled=false;}
+  };
+})();
+</script>
+</body></html>
