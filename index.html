@@ -106,27 +106,6 @@ input[type=file]{display:none}
     <button type="button" id="noClear">إلغاء</button>
   </div>
 
-  <div class="imgout" id="pdfOut" hidden>
-    <div class="imgout-top">
-      <div>
-        <b>ملف PDF جاهز</b>
-        <p>اضغطي الزر لحفظ الملف. في الآيفون اختاري «حفظ في الملفات» أو أرسليه مباشرة عبر الواتساب أو الإيميل.</p>
-      </div>
-      <button type="button" id="pdfClose">إغلاق</button>
-    </div>
-    <button type="button" class="primary" id="pdfSave">حفظ ملف PDF</button>
-  </div>
-
-  <div class="imgout" id="imgOut" hidden>
-    <div class="imgout-top">
-      <div>
-        <b>التقرير جاهز كصورة</b>
-        <p>حفظ PDF غير متاح في هذا المتصفح. احفظي الصورة: في الجوال اضغطي مطولاً على الصورة واختاري «حفظ الصورة»، وفي الكمبيوتر اضغطي بزر الفأرة الأيمن واختاري «حفظ الصورة باسم».</p>
-      </div>
-      <button type="button" id="imgClose">إغلاق</button>
-    </div>
-    <img id="imgOutImg" alt="صورة التقرير بعد التعبئة">
-  </div>
 
   <div class="sheet" id="sheet">
     <div class="head">
@@ -708,30 +687,13 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
 
   $("clearBtn").onclick=()=>{$("confirmBox").hidden=false;};
   $("noClear").onclick=()=>{$("confirmBox").hidden=true;};
-  $("imgClose").onclick=()=>{$("imgOut").hidden=true;};
   $("yesClear").onclick=()=>{
     ["f_student","f_grade","f_skill","f_day","f_date"].forEach(id=>$(id).innerHTML="");
     fillStrategy(sel.value);
     $("shots").innerHTML="";$("confirmBox").hidden=true;save();say("تم مسح بيانات الطالبة والصور، وأُعيدت بيانات الاستراتيجية الأصلية.");
   };
 
-  let dl=null, pdfReady=null;
-  $("pdfClose").onclick=()=>{$("pdfOut").hidden=true;};
-  $("pdfSave").onclick=async()=>{
-    if(!pdfReady)return;
-    const {blob,name}=pdfReady;
-    try{
-      const file=new File([blob],name,{type:"application/pdf"});
-      if(navigator.canShare&&navigator.canShare({files:[file]})){
-        await navigator.share({files:[file],title:name});
-        say("تم. اختاري «حفظ في الملفات» أو أرسليه مباشرة.");return;
-      }
-    }catch(err){if(err&&err.name==="AbortError"){say("أُلغي الحفظ.");return;}}
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");a.href=url;a.download=name;a.target="_blank";a.rel="noopener";
-    document.body.appendChild(a);a.click();a.remove();
-    say("تم تنزيل ملف PDF. إذا فُتح الملف في صفحة جديدة اضغطي زر المشاركة ثم «حفظ في الملفات».");
-  };
+  let dl=null;
   if(window.claude&&window.claude.use){window.claude.use("downloads").then(n=>{dl=n;}).catch(()=>{});}
 
   // Safari often leaves photos out of the captured page, so draw each photo onto the canvas directly
@@ -807,21 +769,19 @@ const STRAT_FIELDS=["name","desc","goals","steps","tools","pos","dif","rec"];
       const who=($("f_student").innerText||"").trim();
       const strat=STRATEGIES.find(x=>x.id===sel.value);
       const name="استمارة "+(strat?strat.label.split(" (")[0]:"استراتيجية")+(who?" - "+who:"")+".pdf";
-      const showImg=()=>{$("pdfOut").hidden=true;$("imgOutImg").src=canvas.toDataURL("image/jpeg",0.92);$("imgOut").hidden=false;$("imgOut").scrollIntoView({behavior:"smooth",block:"start"});say("");};
-      if(!dl){
-        if(window.top===window.self){
-          pdfReady={blob,name};
-          $("imgOut").hidden=true;$("pdfOut").hidden=false;$("pdfOut").scrollIntoView({behavior:"smooth",block:"start"});
-          say("ملف PDF جاهز. اضغطي «حفظ ملف PDF».");return;
+      const direct=()=>{
+        const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+        document.body.appendChild(a);a.click();a.remove();
+        say("تم تصدير ملف PDF.");
+      };
+      if(dl){
+        try{await dl.save({filename:name,data:blob});say("تم تصدير ملف PDF.");return;}
+        catch(err){
+          if(err&&err.code==="declined"){say("أُلغي التصدير.");return;}
+          if(err&&err.code==="rate_limited"){say("هناك نافذة حفظ مفتوحة بالفعل، أكمليها أولاً.");return;}
         }
-        showImg();return;
       }
-      try{await dl.save({filename:name,data:blob});say("تم حفظ ملف PDF.");}
-      catch(err){
-        if(err&&err.code==="declined")say("أُلغي الحفظ.");
-        else if(err&&err.code==="rate_limited")say("هناك نافذة حفظ مفتوحة بالفعل، أكمليها أولاً.");
-        else showImg();
-      }
+      direct();
     }catch(err){say("حدث خطأ أثناء تجهيز الملف. أعيدي المحاولة.");}
     finally{btn.disabled=false;}
   };
